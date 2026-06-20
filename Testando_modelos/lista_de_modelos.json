@@ -1,0 +1,54 @@
+{
+    "0": {
+        "Modelo": "HuggingFaceTB/SmolLM2-135M-Instruct",
+        "ModeloInstalado?": true
+    },
+    "1": {
+        "Modelo": "HuggingFaceTB/SmolLM2-360M-Instruct",
+        "ModeloInstalado?": false
+    },
+    "2": {
+        "Modelo": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "ModeloInstalado?": false
+    },
+    "3": {
+        "Modelo": "Qwen/Qwen2.5-0.5B-Instruct",
+        "ModeloInstalado?": false
+    },
+    "4": {
+        "Modelo": "Qwen/Qwen2.5-1.5B-Instruct",
+        "ModeloInstalado?": false
+    },
+    "5": {
+        "Modelo": "Qwen/Qwen2.5-3B-Instruct",
+        "ModeloInstalado?": false
+    },
+    "6": {
+        "Modelo": "Qwen/Qwen2.5-Math-1.5B-Instruct",
+        "ModeloInstalado?": false
+    },
+    "7": {
+        "Modelo": "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
+        "ModeloInstalado?": false
+    },
+    "8": {
+        "Modelo": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+        "ModeloInstalado?": false
+    },
+    "9": {
+        "Modelo": "meta-llama/Llama-3.2-1B-Instruct",
+        "ModeloInstalado?": false
+    },
+    "10": {
+        "Modelo": "meta-llama/Llama-3.2-3B-Instruct",
+        "ModeloInstalado?": false
+    },
+    "11": {
+        "Modelo": "microsoft/Phi-3-mini-4k-instruct",
+        "ModeloInstalado?": false
+    },
+    "12": {
+        "Modelo": "google/gemma-2-2b-it",
+        "ModeloInstalado?": false
+    }
+}
