@@ -1,0 +1,15 @@
+{
+    "modelo": "microsoft/Phi-3-mini-4k-instruct",
+    "data": "22/06/2026",
+    "eliminado": true,
+    "motivo_eliminacao": "O modelo não rodou na minha maquina",
+    "descrição": null,
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": null
+    },
+    "cenario_a": {
+        "cold_start_segundos": null,
+        "ram_idle_mb": null
+    }
+}

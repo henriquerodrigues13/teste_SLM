@@ -37,7 +37,7 @@
     },
     "9": {
         "Modelo": "meta-llama/Llama-3.2-1B-Instruct",
-        "ModeloInstalado?": false
+        "ModeloInstalado?": true
     },
     "10": {
         "Modelo": "meta-llama/Llama-3.2-3B-Instruct",

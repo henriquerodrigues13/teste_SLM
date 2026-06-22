@@ -1,0 +1,15 @@
+{
+    "modelo": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "data": "22/06/2026",
+    "eliminado": true,
+    "motivo_eliminacao": "Português incompreensível",
+    "descrição": "o modelo não consegue lida com o português",
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": "Português incompreensível"
+    },
+    "cenario_a": {
+        "cold_start_segundos": "33.34 segundos",
+        "ram_idle_mb": "300.6 MB"
+    }
+}

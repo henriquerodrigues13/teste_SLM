@@ -1,0 +1,15 @@
+{
+    "modelo": "Qwen/Qwen2.5-Math-1.5B-Instruct",
+    "data": "22/06/2026",
+    "eliminado": true,
+    "motivo_eliminacao": "RAM usada pelo modelo 2595.7 MB — limite era 2048 MB",
+    "descrição": "o modelo passou do limite de VRAM aceitavel e tambem não entregou o output em portugues",
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": "RAM usada pelo modelo 2595.7 MB — limite era 2048 MB"
+    },
+    "cenario_a": {
+        "cold_start_segundos": "191.03 segundos",
+        "ram_idle_mb": "2595.7 MB"
+    }
+}

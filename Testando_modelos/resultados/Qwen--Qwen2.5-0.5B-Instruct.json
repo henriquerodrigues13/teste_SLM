@@ -1,0 +1,15 @@
+{
+    "modelo": "Qwen/Qwen2.5-0.5B-Instruct",
+    "data": "22/06/2026",
+    "eliminado": false,
+    "motivo_eliminacao": null,
+    "descrição": "o modelo mostrou um output bem estruturado, com grande potential",
+    "eliminacao_manual": {
+        "eliminado": false,
+        "eliminado_por": null
+    },
+    "cenario_a": {
+        "cold_start_segundos": "67.47 segundos",
+        "ram_idle_mb": "939.3 MB"
+    }
+}

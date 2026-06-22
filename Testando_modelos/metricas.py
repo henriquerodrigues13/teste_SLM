@@ -9,8 +9,8 @@ class MetricasInferencia:
         self.processo = psutil.Process(os.getpid())
         self._monitorando = False
         self._thread = None
-        self.tempo_load_modelo_inicial = 0
-        self.tempo_load_modelo_final = 0
+        self.tempo_load_inicial = 0
+        self.tempo_load_final = 0
         self.tempo_inicio = None
         self.tempo_fim = None
         self.ram_pico_mb = 0
@@ -41,14 +41,22 @@ class MetricasInferencia:
         self._thread.join()
 
     def tempo_load_modelo_inicial(self):
-        self.tempo_load_modelo_inicial = time.perf_counter()
+        self.tempo_load_inicial = time.perf_counter()
 
     def tempo_load_modelo_final(self):
-        self.tempo_load_modelo_final = time.perf_counter()
+        self.tempo_load_final = time.perf_counter()
+
+    @property
+    def tempo_carregamento_modelo(self) -> float:
+        return self.tempo_load_final - self.tempo_load_inicial
+
+    @property
+    def tempo_resposta_modelo(self) -> float:
+        return self.tempo_fim - self.tempo_inicio
 
     @property
     def tempo_total(self) -> float:
-        return self.tempo_fim - self.tempo_inicio
+        return self.tempo_resposta_modelo + self.tempo_carregamento_modelo
 
     @property
     def tokens_por_segundo(self) -> float:
@@ -61,12 +69,14 @@ class MetricasInferencia:
     def relatorio(self) -> str:
         return (
             f"""
-            Tempo total       : {self.tempo_total:.2f}s
-            Tokens entrada    : {self.tokens_entrada}
-            Tokens gerados    : {self.tokens_saida}
-            Tokens/segundo    : {self.tokens_por_segundo:.2f}
-            RAM início        : {self.ram_inicio_mb:.1f} MB
-            RAM pico          : {self.ram_pico_mb:.1f} MB0
-            RAM usada (delta) : {self.ram_usada_mb:.1f} MB
+            Tempo de carregamento do modelos        : {self.tempo_carregamento_modelo:.2f}s
+            Tempo de resposta do modelo             : {self.tempo_resposta_modelo:.2f}s
+            Tempo total                             : {self.tempo_total:.2f}s
+            Tokens entrada                          : {self.tokens_entrada}
+            Tokens gerados                          : {self.tokens_saida}
+            Tokens/segundo                          : {self.tokens_por_segundo:.2f}
+            RAM início                              : {self.ram_inicio_mb:.1f} MB
+            RAM pico                                : {self.ram_pico_mb:.1f} MB0
+            RAM usada (delta)                       : {self.ram_usada_mb:.1f} MB
             """
         )

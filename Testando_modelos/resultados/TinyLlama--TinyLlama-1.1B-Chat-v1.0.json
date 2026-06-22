@@ -1,0 +1,15 @@
+{
+    "modelo": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+    "data": "22/06/2026",
+    "eliminado": false,
+    "motivo_eliminacao": null,
+    "descrição": "o modelo não compriu o regra de gera um json mas parece ter comporta bem com lingua portuguesa",
+    "eliminacao_manual": {
+        "eliminado": false,
+        "eliminado_por": null
+    },
+    "cenario_a": {
+        "cold_start_segundos": "279.88 segundos",
+        "ram_idle_mb": "2013.4 MB"
+    }
+}

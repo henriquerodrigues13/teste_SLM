@@ -1,0 +1,15 @@
+{
+    "modelo": "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
+    "data": "22/06/2026",
+    "eliminado": true,
+    "motivo_eliminacao": "RAM usada pelo modelo 2627.8 MB — limite era 2048 MB",
+    "descrição": "o modelo foi eliminado por ultrapassa o limite de VRAM e entregou um output com erros de portugues",
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": "RAM usada pelo modelo 2627.8 MB — limite era 2048 MB"
+    },
+    "cenario_a": {
+        "cold_start_segundos": "237.68 segundos",
+        "ram_idle_mb": "2627.8 MB"
+    }
+}
