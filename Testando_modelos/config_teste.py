@@ -77,7 +77,7 @@ def gerador_de_questoes(modelo: str, instrucao):
             repetition_penalty=1.3,
         )
     tempo_final = time.time() - tempo_inicial
-    print(f"O output demoro: {tempo_final}")
+    print(f"demorou : {tempo_final:.2f} segundos")
     tokens_gerados = saida[0][inputs["input_ids"].shape[1]:]
     return tokenizer.decode(tokens_gerados, skip_special_tokens=True)
 

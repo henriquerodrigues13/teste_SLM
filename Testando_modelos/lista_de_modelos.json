@@ -13,27 +13,27 @@
     },
     "3": {
         "Modelo": "Qwen/Qwen2.5-0.5B-Instruct",
-        "ModeloInstalado?": false
+        "ModeloInstalado?": true
     },
     "4": {
         "Modelo": "Qwen/Qwen2.5-1.5B-Instruct",
-        "ModeloInstalado?": false
+        "ModeloInstalado?": true
     },
     "5": {
         "Modelo": "Qwen/Qwen2.5-3B-Instruct",
-        "ModeloInstalado?": false
+        "ModeloInstalado?": true
     },
     "6": {
         "Modelo": "Qwen/Qwen2.5-Math-1.5B-Instruct",
-        "ModeloInstalado?": false
+        "ModeloInstalado?": true
     },
     "7": {
         "Modelo": "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
-        "ModeloInstalado?": false
+        "ModeloInstalado?": true
     },
     "8": {
         "Modelo": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
-        "ModeloInstalado?": false
+        "ModeloInstalado?": true
     },
     "9": {
         "Modelo": "meta-llama/Llama-3.2-1B-Instruct",
@@ -45,10 +45,10 @@
     },
     "11": {
         "Modelo": "microsoft/Phi-3-mini-4k-instruct",
-        "ModeloInstalado?": false
+        "ModeloInstalado?": true
     },
     "12": {
         "Modelo": "google/gemma-2-2b-it",
-        "ModeloInstalado?": false
+        "ModeloInstalado?": true
     }
 }
