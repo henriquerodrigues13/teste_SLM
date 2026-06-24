@@ -2,9 +2,7 @@ import json
 import os
 from pathlib import Path
 from transformers import AutoTokenizer, AutoModelForCausalLM
-
-from Testando_modelos.cenarios import *
-from Testando_modelos import download_modelos, config_teste
+from Testando_modelos import download_modelos
 from Testando_modelos.cenarios.cenario_A import cenario_a
 from Testando_modelos.metricas import MetricasInferencia
 
@@ -33,8 +31,9 @@ while True:
             print(f"id {id} do modelo: {modelo['Modelo']}")
         x = input("digite o id do modelo: ")
         print("Carregando modelo...")
+
         metricas = MetricasInferencia()
-        BASE_DIR = Path(__file__).parent.parent
+        BASE_DIR = Path(__file__).parent
         nome_pasta = f"{lista_modelos[x]["Modelo"]}".replace("/", "--")
         caminho = BASE_DIR / "modelos_local" / nome_pasta
 
@@ -43,5 +42,6 @@ while True:
         model = AutoModelForCausalLM.from_pretrained(caminho, local_files_only=True)
         model.eval()
         metricas.tempo_load_modelo_final()
-        cenario_a(lista_modelos[x]['Modelo'])
+        print(f"Pronto! o modelo: {lista_modelos[x]["Modelo"]} foi carregado com sucesso!")
+        cenario_a(lista_modelos[x]['Modelo'], tokenizer, model, metricas)
 

@@ -1,26 +1,11 @@
 import datetime
 import json
 from pathlib import Path
-from time import sleep
-
 import torch
-from Testando_modelos.metricas import MetricasInferencia
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from Testando_modelos.instrucao.instrucao_a import instrucao
 
-def cenario_a(modelo: str):
-    print("Carregando modelo...")
-    metricas = MetricasInferencia()
-    BASE_DIR = Path(__file__).parent.parent
-    nome_pasta = modelo.replace("/", "--")
-    caminho = BASE_DIR / "modelos_local" / nome_pasta
-
-    metricas.tempo_load_modelo_inicial()
-    tokenizer = AutoTokenizer.from_pretrained(caminho, local_files_only=True)
-    model = AutoModelForCausalLM.from_pretrained(caminho, local_files_only=True)
-    model.eval()
-    metricas.tempo_load_modelo_final()
-    print(f"Pronto! modelo: {modelo} carregando")
+def cenario_a(modelo: str, tokenizer, model, metricas):
 
     prompt_sistema = (
         """
@@ -38,6 +23,31 @@ def cenario_a(modelo: str):
         - Retorne SOMENTE o JSON estruturado solicitado, sem texto adicional, markdown ou explicações fora do JSON.
         - Todas as questões devem ser inéditas entre si na mesma resposta.
         - A resposta correta deve ser distribuída de forma variada entre A, B, C, D e E ao longo das questões.
+        
+        Retorne SOMENTE um JSON com esta estrutura exata:
+        {
+            "questoes": [
+                {
+                    "enunciado": "...",
+                    "alternativas": {
+                        "A": "...",
+                        "B": "...",
+                        "C": "...",
+                        "D": "...",
+                        "E": "..."
+                    },
+                    "resposta_correta": "A",
+                    "resolucao_passo_a_passo": "..."
+                }
+            ]
+        }
+        
+        O campo "resolucao_passo_a_passo" é OBRIGATÓRIO e não pode ser omitido nem deixado vazio.
+        Nele você deve escrever a resolução completa da questão como um professor explicaria para o aluno:
+        - Identifique o que a questão pede
+        - Explique cada etapa do raciocínio em ordem
+        - Justifique por que a resposta correta está certa
+        - Justifique por que cada distrator está errado
         """
     )
 
