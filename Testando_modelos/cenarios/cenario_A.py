@@ -42,12 +42,7 @@ def cenario_a(modelo: str, tokenizer, model, metricas):
             ]
         }
         
-        O campo "resolucao_passo_a_passo" é OBRIGATÓRIO e não pode ser omitido nem deixado vazio.
-        Nele você deve escrever a resolução completa da questão como um professor explicaria para o aluno:
-        - Identifique o que a questão pede
-        - Explique cada etapa do raciocínio em ordem
-        - Justifique por que a resposta correta está certa
-        - Justifique por que cada distrator está errado
+        O campo "resolucao_passo_a_passo" é OBRIGATÓRIO. Mostre apenas os passos de cálculo para chegar na resposta correta, de forma objetiva.
         """
     )
 
@@ -137,7 +132,8 @@ def cenario_a(modelo: str, tokenizer, model, metricas):
     }
 
     pasta_resultados = Path(__file__).parent.parent / "resultados"
-    pasta_resultados.mkdir(exist_ok=True)
+    pasta_resultados.mkdir(exist_ok=True, parents=True)
+    nome_arquivo = modelo.replace("/", "--")
 
-    with open(pasta_resultados / f"{nome_pasta}.json", "w", encoding="utf-8") as arquivo:
+    with open(pasta_resultados / f"{nome_arquivo}.json", "w", encoding="utf-8") as arquivo:
         json.dump(resultados, arquivo, indent=4, ensure_ascii=False)

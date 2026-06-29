@@ -17,6 +17,9 @@ class MetricasInferencia:
         self.ram_inicio_mb = 0
         self.tokens_entrada = 0
         self.tokens_saida = 0
+        self.tempo_total_por_rodada = []
+        self.TPS_por_rodada = []
+        self.ram_por_rodada = []
 
     def _monitorar_ram(self):
         while self._monitorando:
@@ -39,6 +42,22 @@ class MetricasInferencia:
         self.tokens_saida = tokens_saida
         self._monitorando = False
         self._thread.join()
+
+    def iniciar_rodada(self):
+        self.tempo_inicio = time.perf_counter()
+        self.ram_inicio_mb = self.processo.memory_info().rss / (1024 ** 2)
+        self.ram_pico_mb = self.ram_inicio_mb
+        self._thread = threading.Thread(target=self._monitorar_ram, daemon=True)
+        self._thread.start()
+
+    def finalizar_rodada(self, tokens_saida: int):
+        self.tempo_fim = time.perf_counter()
+        self.tokens_saida = tokens_saida
+        self._monitorando = False
+        self._thread.join()
+        self.ram_por_rodada.append(self.ram_usada_mb)
+        self.TPS_por_rodada.append(tokens_saida / self.tempo_resposta_modelo)
+        self.tempo_total_por_rodada.append(self.tempo_fim - self.tempo_inicio)
 
     def tempo_load_modelo_inicial(self):
         self.tempo_load_inicial = time.perf_counter()
@@ -65,6 +84,19 @@ class MetricasInferencia:
     @property
     def ram_usada_mb(self) -> float:
         return self.ram_pico_mb - self.ram_inicio_mb
+
+    @property
+    def media_rodadas(self) -> dict:
+        tps_medio = sum(self.TPS_por_rodada) / len(self.TPS_por_rodada)
+        ram_media = sum(self.ram_por_rodada) / len(self.ram_por_rodada)
+        tempo_medio = sum(self.tempo_total_por_rodada) / len(self.tempo_total_por_rodada)
+
+        return {
+            "tps_medio": tps_medio,
+            "ram_media_mb": ram_media,
+            "tempo_medio_segundos": tempo_medio
+        }
+
 
     def relatorio(self) -> str:
         return (

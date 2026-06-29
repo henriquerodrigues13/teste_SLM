@@ -3,9 +3,21 @@ import os
 from pathlib import Path
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from Testando_modelos import download_modelos
-from Testando_modelos.cenarios.cenario_A import cenario_a
+from Testando_modelos.cenarios import cenario_A, cenario_B
 from Testando_modelos.metricas import MetricasInferencia
 
+
+def modelo_eliminado(modelo: str) -> bool:
+    nome_arquivo = modelo.replace("/", "--")
+    arquivo = Path(__file__).parent / "resultados" / f"{nome_arquivo}.json"
+
+    if not arquivo.exists():
+        return False
+
+    with open(arquivo, "r", encoding="utf-8") as f:
+        dados = json.load(f)
+
+    return dados.get("eliminado", False) or dados.get("eliminacao_manual", {}).get("eliminado", False)
 while True:
     os.system("cls")
     print("O que vc quer fazer")
@@ -43,5 +55,13 @@ while True:
         model.eval()
         metricas.tempo_load_modelo_final()
         print(f"Pronto! o modelo: {lista_modelos[x]["Modelo"]} foi carregado com sucesso!")
-        cenario_a(lista_modelos[x]['Modelo'], tokenizer, model, metricas)
+        cenario_A.cenario_a(lista_modelos[x]['Modelo'], tokenizer, model, metricas)
+        if modelo_eliminado(lista_modelos[x]['Modelo']):
+            print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
+            continue
+        cenario_B.cenario_b(lista_modelos[x]['Modelo'], tokenizer, model, metricas)
+        if modelo_eliminado(lista_modelos[x]['Modelo']):
+            print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
+            continue
+
 
