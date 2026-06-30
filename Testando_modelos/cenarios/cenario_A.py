@@ -85,7 +85,7 @@ def cenario_a(modelo: str, tokenizer, model, metricas):
     with torch.no_grad():
         saida = model.generate(
             **inputs,
-            max_new_tokens=1024,
+            max_new_tokens=512,
             do_sample=False,
             temperature=None,
             top_p=None,

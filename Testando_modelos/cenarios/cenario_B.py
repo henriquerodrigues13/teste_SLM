@@ -1,6 +1,5 @@
 import json
 from pathlib import Path
-
 import torch
 from Testando_modelos.valida_json import extrair_e_validar
 from Testando_modelos.instrucao.instrucao_b import seletor_de_questao
@@ -72,7 +71,7 @@ def cenario_b(modelo: str, tokenizer, model, metricas):
                         Gere 1 questão(ões) novas, inéditas e alinhadas à habilidade {instrucao["habilidadeContext"]["habilidadeId"]}.
                         """
             )
-            print(prompt)
+
             modelos_sem_system = ["google/gemma-2-2b-it"]
 
             if modelo in modelos_sem_system:
@@ -163,6 +162,22 @@ def cenario_b(modelo: str, tokenizer, model, metricas):
 
     dados_existentes["cenario_b"] = resultados["cenario_b"]
 
+    if crashes_oom > 0:
+        dados_existentes["eliminado"] = True
+        dados_existentes["motivo_eliminacao"] = f"Crash/OOM detectado — {crashes_oom} ocorrência(s)"
+
+    elif max(metricas.TPS_por_rodada) > 2048:
+        dados_existentes["eliminado"] = True
+        dados_existentes["motivo_eliminacao"] = f"RAM média {dados['ram_media_mb']:.1f} MB — limite era 2048 MB"
+
+    elif len(metricas.TPS_por_rodada) == 10:
+        tps_inicial = metricas.TPS_por_rodada[0]
+        tps_final = metricas.TPS_por_rodada[-1]
+        if tps_inicial > 0:
+            degradacao = (tps_inicial - tps_final) / tps_inicial * 100
+            if degradacao > 40:
+                dados_existentes["eliminado"] = True
+                dados_existentes["motivo_eliminacao"] = f"Degradação de TPS severa: {degradacao:.1f}% entre 1ª e 10ª geração"
+
     with open(arquivo, "w", encoding="utf-8") as f:
         json.dump(dados_existentes, f, indent=4, ensure_ascii=False)
-

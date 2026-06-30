@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from Testando_modelos import download_modelos
-from Testando_modelos.cenarios import cenario_A, cenario_B
+from Testando_modelos.cenarios import cenario_A, cenario_B, cenario_C
 from Testando_modelos.metricas import MetricasInferencia
 
 
@@ -63,5 +63,7 @@ while True:
         if modelo_eliminado(lista_modelos[x]['Modelo']):
             print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
             continue
-
-
+        cenario_C.cenario_c(lista_modelos[x]['Modelo'], tokenizer, model)
+        if modelo_eliminado(lista_modelos[x]['Modelo']):
+            print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
+            continue
