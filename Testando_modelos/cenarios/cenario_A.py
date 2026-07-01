@@ -48,19 +48,19 @@ def cenario_a(modelo: str, tokenizer, model, metricas):
 
     prompt = (
         f"""
-            Gere exatamente {instrucao["quantity"]} questão(ões) de múltipla escolha para a seguinte habilidade da BNCC:
+        Gere exatamente {instrucao["quantity"]} questão(ões) de múltipla escolha para a seguinte habilidade da BNCC:
 
-            **Habilidade:** {instrucao["habilidadeContext"]["habilidadeId"]}
-            **Unidade Temática:** {instrucao["habilidadeContext"]["unidadeTematica"]["nome"]}
+        **Habilidade:** {instrucao["habilidadeContext"]["habilidadeId"]}
+        **Unidade Temática:** {instrucao["habilidadeContext"]["unidadeTematica"]["nome"]}
 
-            **Pré-requisitos que o aluno já deve dominar (calibração de dificuldade):**
-            {", ".join(instrucao["habilidadeContext"]["prerequisites"])}
+        **Pré-requisitos que o aluno já deve dominar (calibração de dificuldade):**
+        {", ".join(instrucao["habilidadeContext"]["prerequisites"]) if instrucao["habilidadeContext"]["prerequisites"] else "Não especificada."}
 
-            **Exemplos de questões existentes para esta habilidade (mantenha consistência de estilo):**
-            {"Exemplo 1: " + instrucao["habilidadeContext"]["examples"][0]["enunciado"]}
+        **Exemplos de questões existentes para esta habilidade (mantenha consistência de estilo):**
+        {"Exemplo 1: " + instrucao["habilidadeContext"]["examples"][0]["enunciado"]}
 
-            Gere {instrucao["quantity"]} questão(ões) novas, inéditas e alinhadas à habilidade {instrucao["habilidadeContext"]["habilidadeId"]}.
-            """
+        Gere {instrucao["quantity"]} questão(ões) novas, inéditas e alinhadas à habilidade {instrucao["habilidadeContext"]["habilidadeId"]}.
+        """
     )
 
     modelos_sem_system = ["google/gemma-2-2b-it"]

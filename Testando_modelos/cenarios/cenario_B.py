@@ -12,117 +12,117 @@ def cenario_b(modelo: str, tokenizer, model, metricas):
     for i in range(10):
         metricas.iniciar_rodada()
         tokens_gerados_por_rodada = 0
-        for j in range(3):
-            instrucao = seletor_de_questao()
 
-            prompt_sistema = (
-                """
-                Você é um especialista sênior em elaboração de itens avaliativos de Matemática para o Ensino Fundamental (1º ao 9º ano), com domínio profundo da Base Nacional Comum Curricular (BNCC).
-    
-                Suas responsabilidades:
-                - Criar questões de múltipla escolha (5 alternativas: A, B, C, D, E) rigorosamente alinhadas à habilidade da BNCC solicitada.
-                - Garantir que o enunciado seja claro, contextualizado e adequado à faixa etária do estudante.
-                - Produzir alternativas plausíveis e com distratores pedagogicamente fundamentados (erros comuns dos alunos, não respostas absurdas).
-                - Redigir a resolução passo a passo de forma didática, como faria um professor explicando para o aluno.
-                - Calibrar a dificuldade respeitando os pré-requisitos informados: os conceitos listados em pré-requisitos devem ser dominados pelo aluno, e NÃO devem ser o foco central da questão — use-os como base para atingir a habilidade-alvo.
-                - Manter consistência de estilo, formato e nível de abstração com os exemplos fornecidos (few-shot).
-    
-                Regras absolutas:
-                - Retorne SOMENTE o JSON estruturado solicitado, sem texto adicional, markdown ou explicações fora do JSON.
-                - Todas as questões devem ser inéditas entre si na mesma resposta.
-                - A resposta correta deve ser distribuída de forma variada entre A, B, C, D e E ao longo das questões.
-    
-                Retorne SOMENTE um JSON com esta estrutura exata:
-                {
-                    "questoes": [
-                        {
-                            "enunciado": "...",
-                            "alternativas": {
-                                "A": "...",
-                                "B": "...",
-                                "C": "...",
-                                "D": "...",
-                                "E": "..."
-                            },
-                            "resposta_correta": "A",
-                            "resolucao_passo_a_passo": "..."
-                        }
-                    ]
-                }
-    
-                 O campo "resolucao_passo_a_passo" é OBRIGATÓRIO. Mostre apenas os passos de cálculo para chegar na resposta correta, de forma objetiva.
-                """
-            )
+        instrucao = seletor_de_questao()
 
-            prompt = (
-                f"""
-                        Gere exatamente 1 questão(ões) de múltipla escolha para a seguinte habilidade da BNCC:
-    
-                        **Habilidade:** {instrucao["habilidadeContext"]["habilidadeId"]}
-                        **Unidade Temática:** {instrucao["habilidadeContext"]["unidadeTematica"]["nome"]}
-    
-                        **Pré-requisitos que o aluno já deve dominar (calibração de dificuldade):**
-                        {", ".join(instrucao["habilidadeContext"]["prerequisites"])if not [] else "Não especificada."}
-    
-                        **Exemplos de questões existentes para esta habilidade (mantenha consistência de estilo):**
-                        {"\n".join([f"Exemplo {x + 1}: {instrucao['habilidadeContext']['examples'][x]['enunciado']}"
-                        for x in range(len(instrucao["habilidadeContext"]["examples"]))]) if instrucao["habilidadeContext"]["examples"] else "Nenhum exemplo disponível — crie questões seguindo as diretrizes gerais da BNCC."}
-    
-                        Gere 1 questão(ões) novas, inéditas e alinhadas à habilidade {instrucao["habilidadeContext"]["habilidadeId"]}.
-                        """
-            )
+        prompt_sistema = (
+            """
+            Você é um especialista sênior em elaboração de itens avaliativos de Matemática para o Ensino Fundamental (1º ao 9º ano), com domínio profundo da Base Nacional Comum Curricular (BNCC).
 
-            modelos_sem_system = ["google/gemma-2-2b-it"]
+            Suas responsabilidades:
+            - Criar questões de múltipla escolha (5 alternativas: A, B, C, D, E) rigorosamente alinhadas à habilidade da BNCC solicitada.
+            - Garantir que o enunciado seja claro, contextualizado e adequado à faixa etária do estudante.
+            - Produzir alternativas plausíveis e com distratores pedagogicamente fundamentados (erros comuns dos alunos, não respostas absurdas).
+            - Redigir a resolução passo a passo de forma didática, como faria um professor explicando para o aluno.
+            - Calibrar a dificuldade respeitando os pré-requisitos informados: os conceitos listados em pré-requisitos devem ser dominados pelo aluno, e NÃO devem ser o foco central da questão — use-os como base para atingir a habilidade-alvo.
+            - Manter consistência de estilo, formato e nível de abstração com os exemplos fornecidos (few-shot).
 
-            if modelo in modelos_sem_system:
-                mensagens = [
-                    {"role": "user", "content": f"{prompt_sistema}\n\n{prompt}"}
+            Regras absolutas:
+            - Retorne SOMENTE o JSON estruturado solicitado, sem texto adicional, markdown ou explicações fora do JSON.
+            - Todas as questões devem ser inéditas entre si na mesma resposta.
+            - A resposta correta deve ser distribuída de forma variada entre A, B, C, D e E ao longo das questões.
+
+            Retorne SOMENTE um JSON com esta estrutura exata:
+            {
+                "questoes": [
+                    {
+                        "enunciado": "...",
+                        "alternativas": {
+                            "A": "...",
+                            "B": "...",
+                            "C": "...",
+                            "D": "...",
+                            "E": "..."
+                        },
+                        "resposta_correta": "A",
+                        "resolucao_passo_a_passo": "..."
+                    }
                 ]
-            else:
-                mensagens = [
-                    {"role": "system", "content": prompt_sistema},
-                    {"role": "user", "content": prompt},
-                ]
+            }
 
-            prompt = tokenizer.apply_chat_template(
-                mensagens, tokenize=False, add_generation_prompt=True
-            )
+             O campo "resolucao_passo_a_passo" é OBRIGATÓRIO. Mostre apenas os passos de cálculo para chegar na resposta correta, de forma objetiva.
+            """
+        )
 
-            inputs = tokenizer(prompt, return_tensors="pt")
+        prompt = (
+            f"""
+            Gere exatamente 3 questão(ões) de múltipla escolha para a seguinte habilidade da BNCC:
 
-            try:
-                with torch.no_grad():
-                    saida = model.generate(
-                        **inputs,
-                        max_new_tokens=512,
-                        do_sample=False,
-                        temperature=None,
-                        top_p=None,
-                        repetition_penalty=1.3,
-                    )
-            except MemoryError:
-                crashes_oom += 1
+            **Habilidade:** {instrucao["habilidadeContext"]["habilidadeId"]}
+            **Unidade Temática:** {instrucao["habilidadeContext"]["unidadeTematica"]["nome"]}
 
-            except Exception as e:
-                crashes_oom += 1
-                print(f"Crash na rodada {i}: {e}")
+            **Pré-requisitos que o aluno já deve dominar (calibração de dificuldade):**
+            {", ".join(instrucao["habilidadeContext"]["prerequisites"]) if instrucao["habilidadeContext"]["prerequisites"] else "Não especificada."}
 
-            tokens_gerados = saida[0][inputs["input_ids"].shape[1]:]
-            tokens_gerados_por_rodada += len(tokens_gerados)
+            **Exemplos de questões existentes para esta habilidade (mantenha consistência de estilo):**
+            {"\n".join([f"Exemplo {x + 1}: {instrucao['habilidadeContext']['examples'][x]['enunciado']}"
+            for x in range(len(instrucao["habilidadeContext"]["examples"]))]) if instrucao["habilidadeContext"]["examples"] else "Nenhum exemplo disponível — crie questões seguindo as diretrizes gerais da BNCC."}
 
-            output_text = tokenizer.decode(tokens_gerados, skip_special_tokens=True)
+            Gere 3 questão(ões) novas, inéditas e alinhadas à habilidade {instrucao["habilidadeContext"]["habilidadeId"]}.
+            """
+        )
 
-            print("output:")
-            print("-" * 50)
-            print(output_text)
-            print("-" * 50)
+        modelos_sem_system = ["google/gemma-2-2b-it"]
 
-            valido, resultado, erro = extrair_e_validar(output_text)
+        if modelo in modelos_sem_system:
+            mensagens = [
+                {"role": "user", "content": f"{prompt_sistema}\n\n{prompt}"}
+            ]
+        else:
+            mensagens = [
+                {"role": "system", "content": prompt_sistema},
+                {"role": "user", "content": prompt},
+            ]
 
-            if valido:
-                json_validos += 1
-            else:
-                json_invalidos += 1
+        prompt = tokenizer.apply_chat_template(
+            mensagens, tokenize=False, add_generation_prompt=True
+        )
+
+        inputs = tokenizer(prompt, return_tensors="pt")
+
+        try:
+            with torch.no_grad():
+                saida = model.generate(
+                    **inputs,
+                    max_new_tokens=512,
+                    do_sample=True,
+                    temperature=0.7,
+                    top_p=0.9,
+                    repetition_penalty=1.3,
+                )
+        except MemoryError:
+            crashes_oom += 1
+
+        except Exception as e:
+            crashes_oom += 1
+            print(f"Crash na rodada {i}: {e}")
+
+        tokens_gerados = saida[0][inputs["input_ids"].shape[1]:]
+        tokens_gerados_por_rodada += len(tokens_gerados)
+
+        output_text = tokenizer.decode(tokens_gerados, skip_special_tokens=True)
+
+        print("output:")
+        print("-" * 50)
+        print(output_text)
+        print("-" * 50)
+
+        valido, resultado, erro = extrair_e_validar(output_text)
+
+        if valido:
+            json_validos += 1
+        else:
+            json_invalidos += 1
         metricas.finalizar_rodada(tokens_gerados_por_rodada)
     dados = metricas.media_rodadas()
     print("-" * 50)

@@ -1,15 +1,15 @@
 {
     "modelo": "HuggingFaceTB/SmolLM2-135M-Instruct",
-    "data": "29/06/2026",
-    "eliminado": "S",
-    "motivo_eliminacao": "Português incompreensível",
-    "descrição": "O modelo não respondeu bem ao portugues, estruturou muito mal o output e não tem espaço pra melhora pelo seu tamanho muito pequeno",
+    "data": "30/06/2026",
+    "eliminado": false,
+    "motivo_eliminacao": null,
+    "descrição": "n",
     "eliminacao_manual": {
-        "eliminado": "S",
-        "eliminado_por": "Português incompreensível"
+        "eliminado": false,
+        "eliminado_por": null
     },
     "cenario_a": {
-        "cold_start_segundos": "80.07 segundos",
-        "ram_idle_mb": "318.2 MB"
+        "cold_start_segundos": "45.82 segundos",
+        "ram_idle_mb": "299.4 MB"
     }
 }

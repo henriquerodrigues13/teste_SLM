@@ -2,24 +2,33 @@ import json
 import re
 from Testando_modelos.schema_json import GeneratedQuestionsResponse
 
+
 def extrair_e_validar(texto: str) -> tuple[bool, GeneratedQuestionsResponse | None, str | None]:
-    match = re.search(r"```json\s*(.*?)\s*```", texto, re.DOTALL)
-    if match:
-        json_str = match.group(1).strip()
-    else:
-        match = re.search(r"\{.*\}", texto, re.DOTALL)
-        if match:
-            json_str = match.group(0).strip()
-        else:
-            return False, None, "JSON não encontrado na resposta"
+    candidatos = []
 
-    try:
-        dados = json.loads(json_str)
-        resultado = GeneratedQuestionsResponse.model_validate(dados)
-        return True, resultado, None
+    matches_markdown = re.findall(r"```json\s*(.*?)\s*```", texto, re.DOTALL)
+    candidatos.extend([m.strip() for m in matches_markdown])
 
-    except json.JSONDecodeError as e:
-        return False, None, f"JSON inválido: {e}"
+    matches_chaves = re.findall(r"\{.*?\}(?=\s*(?:```|$|\{))", texto, re.DOTALL)
+    candidatos.extend([m.strip() for m in matches_chaves])
 
-    except Exception as e:
-        return False, None, f"Schema inválido: {e}"
+    if not candidatos:
+        return False, None, "JSON não encontrado na resposta"
+
+    ultimo_erro = None
+
+    for json_str in candidatos:
+        try:
+            dados = json.loads(json_str)
+            resultado = GeneratedQuestionsResponse.model_validate(dados)
+            return True, resultado, None
+
+        except json.JSONDecodeError as e:
+            ultimo_erro = f"JSON inválido: {e}"
+            continue
+
+        except Exception as e:
+            ultimo_erro = f"Schema inválido: {e}"
+            continue
+
+    return False, None, ultimo_erro or "Nenhum candidato de JSON válido encontrado"
