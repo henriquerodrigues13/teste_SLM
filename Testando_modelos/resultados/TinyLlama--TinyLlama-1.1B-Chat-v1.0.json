@@ -1,0 +1,15 @@
+{
+    "modelo": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+    "data": "01/07/2026",
+    "eliminado": true,
+    "motivo_eliminacao": "Português incompreensível",
+    "descrição": "O modelo nao respondeu de forma em um formato JSON e estruturo a reposta em portugues",
+    "eliminacao_manual": {
+        "eliminado": "S",
+        "eliminado_por": "Português incompreensível"
+    },
+    "cenario_a": {
+        "cold_start_segundos": "188.48 segundos",
+        "ram_idle_mb": "1845.2 MB"
+    }
+}

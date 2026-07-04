@@ -1,15 +1,15 @@
 {
     "modelo": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
-    "data": "29/06/2026",
+    "data": "01/07/2026",
     "eliminado": true,
-    "motivo_eliminacao": "RAM usada pelo modelo 3419.2 MB — limite era 2048 MB",
-    "descrição": "O modelo respondeu de forma ate adequanda mas uso RAM demais no processo, melhor busca modelos quantizados dele",
+    "motivo_eliminacao": "RAM usada pelo modelo 3389.1 MB — limite era 2048 MB",
+    "descrição": "O modelo alem de usa RAM alem do determinado, não estruturou um output no formato certo do json",
     "eliminacao_manual": {
         "eliminado": true,
-        "eliminado_por": "RAM usada pelo modelo 3419.2 MB — limite era 2048 MB"
+        "eliminado_por": "RAM usada pelo modelo 3389.1 MB — limite era 2048 MB"
     },
     "cenario_a": {
-        "cold_start_segundos": "164.19 segundos",
-        "ram_idle_mb": "3419.2 MB"
+        "cold_start_segundos": "233.95 segundos",
+        "ram_idle_mb": "3389.1 MB"
     }
 }

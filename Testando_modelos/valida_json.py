@@ -32,3 +32,13 @@ def extrair_e_validar(texto: str) -> tuple[bool, GeneratedQuestionsResponse | No
             continue
 
     return False, None, ultimo_erro or "Nenhum candidato de JSON válido encontrado"
+
+
+def parsear_json_bruto(texto: str) -> dict | str:
+    match = re.search(r"```json\s*(.*?)\s*```", texto, re.DOTALL)
+    json_str = match.group(1).strip() if match else texto.strip()
+
+    try:
+        return json.loads(json_str)
+    except json.JSONDecodeError:
+        return texto

@@ -42,7 +42,7 @@ def cenario_a(modelo: str, tokenizer, model, metricas):
             ]
         }
         
-        O campo "resolucao_passo_a_passo" é OBRIGATÓRIO. Mostre apenas os passos de cálculo para chegar na resposta correta, de forma objetiva.
+        O campo "resolucao_passo_a_passo" é OBRIGATÓRIO. Liste apenas os passos de cálculo numerados, no formato "expressão = resultado". Sem texto introdutório, sem explicações teóricas, sem conclusão.
         """
     )
 
@@ -85,11 +85,11 @@ def cenario_a(modelo: str, tokenizer, model, metricas):
     with torch.no_grad():
         saida = model.generate(
             **inputs,
-            max_new_tokens=512,
+            max_new_tokens=1024,
             do_sample=False,
             temperature=None,
             top_p=None,
-            repetition_penalty=1.3,
+            repetition_penalty=1.1,
         )
     tokens_gerados = saida[0][inputs["input_ids"].shape[1]:]
     metricas.finalizar(int(len(tokens_gerados)))
@@ -110,6 +110,7 @@ def cenario_a(modelo: str, tokenizer, model, metricas):
         reposta = input(f"O modelo {modelo} está eliminado? [S ou N]")
         if reposta.upper() == "S":
                 motivo = "Português incompreensível"
+                reposta = True
         else:
             reposta = False
             motivo = None

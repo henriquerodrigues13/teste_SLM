@@ -93,11 +93,11 @@ def cenario_c(modelo: str, tokenizer, model):
         with torch.no_grad():
             saida = model.generate(
                 **inputs,
-                max_new_tokens=512,
+                max_new_tokens=1024,
                 do_sample=True,
                 temperature=0.7,
                 top_p=0.9,
-                repetition_penalty=1.3,
+                repetition_penalty=1.1,
             )
         tokens_gerados = saida[0][inputs["input_ids"].shape[1]:]
 
@@ -116,6 +116,7 @@ def cenario_c(modelo: str, tokenizer, model):
         print(tokenizer.decode(tokens_gerados, skip_special_tokens=True))
         print("total de tentativas: ", tentativas)
         print("-" * 50)
+        x = input()
 
     resultados = {
         "cenario_c": {

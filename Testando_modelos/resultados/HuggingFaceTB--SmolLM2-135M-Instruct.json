@@ -1,15 +1,44 @@
 {
     "modelo": "HuggingFaceTB/SmolLM2-135M-Instruct",
-    "data": "30/06/2026",
-    "eliminado": false,
-    "motivo_eliminacao": null,
-    "descrição": "n",
+    "data": "01/07/2026",
+    "eliminado": true,
+    "motivo_eliminacao": "Português incompreensível",
+    "descrição": "O modelo entregou um output que está estruturando o json e não tem compreensão em portugues",
     "eliminacao_manual": {
-        "eliminado": false,
-        "eliminado_por": null
+        "eliminado": "S",
+        "eliminado_por": "Português incompreensível"
     },
     "cenario_a": {
-        "cold_start_segundos": "45.82 segundos",
-        "ram_idle_mb": "299.4 MB"
+        "cold_start_segundos": "42.76 segundos",
+        "ram_idle_mb": "244.2 MB"
+    },
+    "cenario_c": {
+        "execucoes": 3,
+        "quantidade_de_questoes": 5,
+        "tentativas": 3,
+        "valido_primeira_tentativa": false,
+        "precisou_retry": false,
+        "falhou_com_3_tentativas": true,
+        "aprovado": false
+    },
+    "cenario_d": {
+        "habilidades_testadas": [
+            "EF08MA05",
+            "EF06MA17"
+        ],
+        "outputs": {
+            "EF08MA05": {
+                "erro": "JSON não encontrado na resposta",
+                "output_bruto": "Você tem uma experiênea simples usando e desenvolvimento de questões de múltipla escolha, com outras controle de forma relacionada à base de dados de mais diferentes tarefas.\n\nUma teoria de comportamento, destaque a essencia de cada aluno em todo lugar, respectando o diferencias no tempo e no trabalho. Para isto, como esses algoritmos podem ser utilizados, ele funciona como uma regra de estilos modalidadistas (alguma regra para a bancaria, outra para a empresa). O que é necessário ser transmitido à partida? O que é possível ser sentado a serem acessadas nos casos realizados? Pode-se ter problemas pessoas instituciógiosmente que não sejam suportados? Entender sobre essas coisas, você deverá verificar a suplicidade de específico ao desafio.\n\nPara isso, vamos mostrar uma lista de questões de múltipla escolha, com cada exemplo disponível, informações importantas como estresas, manuscritas, e condições. O que é importante ser encontrado? Para que os alunos poderam motivar aisles para estudo, temos que nossa empresa seria responsable de obter os exemplos usados e encontrando uma solução aborda.\n\nTambém vamos mostrar que foi útil a capturar o resultado destacado quando fimou o éfetivo da bancaria. Quero ser maior que 200 testèos.\n\nEntão, eu sabemos que você tem uma experiência simples para incluir e executar este tipo de questões de múltipla escolha. Se você disso irá ser programadorá, você pode ser uma vez por verificar a su"
+            },
+            "EF06MA17": {
+                "erro": "JSON não encontrado na resposta",
+                "output_bruto": "Selecione uma opção do menu de externamento (seleca o seletor):\n\n1. Selecto o controle da experiência do entrenador: \n![Controle da experiência do entrenador](https://i.stack.imgur.com/JrqxM.png)\n2. Selecione um controle:\n    - Selecione o grupo do entrenador: [Entrenadores](#GruposDeEntrenadores)\n    - Selecione o numero de colegios: [Numeros de Colegios](#Colégios)\n    - Selecione o numero de cursos: [Numero de Curso](#Curso)\n    - Selecione a biblioteca: [Libro Bibliotecas](#LibroBibliotecias)\n    - Selecione o endereco do cliente: [Endereço de Cliente](#Cliente)\n    - Selecione o tipo de lugar: [Tipo de Lugar](#TipoDeLugar)\n\n    Para ajudá-lo, vai verificar se você selecionou alguma opção do menu de externamento.\n\n    Selecione uma opção do menu de externamento:\n    1. Selecto o grupo do entrenador:\n    2. Selecione o numero de colegios:\n    3. Selecione o numero de cursos:\n    4. Selecione a biblioteca:\n    5. Selecione o endereco do cliente:\n    6. Selecione o tipo de lugar:\n    7. Selecione o endereço de cliente:\n    8. Selecione o tipo de lugar:\n    9. Selecione o numero de curso:\n    10. Selecione a biblioteca:\n    11. Selecione o endereco do cliente:\n\n     Para ajudá-lo, vai verificar se você selecionou alguma opção do menu de externamento.\n\nVocê selecione uma opção do menu de externamento: \n"
+            }
+        },
+        "json_valido": {
+            "EF08MA05": false,
+            "EF06MA17": false
+        }
     }
 }

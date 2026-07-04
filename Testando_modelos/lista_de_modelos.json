@@ -1,54 +1,38 @@
 {
     "0": {
-        "Modelo": "HuggingFaceTB/SmolLM2-135M-Instruct",
-        "ModeloInstalado?": true
+        "Modelo": "HuggingFaceTB/SmolLM2-135M-Instruct"
     },
     "1": {
-        "Modelo": "HuggingFaceTB/SmolLM2-360M-Instruct",
-        "ModeloInstalado?": true
+        "Modelo": "HuggingFaceTB/SmolLM2-1.7B-Instruct"
     },
     "2": {
-        "Modelo": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
-        "ModeloInstalado?": true
+        "Modelo": "Qwen/Qwen2.5-0.5B-Instruct"
     },
     "3": {
-        "Modelo": "Qwen/Qwen2.5-0.5B-Instruct",
-        "ModeloInstalado?": true
+        "Modelo": "Qwen/Qwen2.5-1.5B-Instruct"
     },
     "4": {
-        "Modelo": "Qwen/Qwen2.5-1.5B-Instruct",
-        "ModeloInstalado?": true
+        "Modelo": "Qwen/Qwen2.5-3B-Instruct"
     },
     "5": {
-        "Modelo": "Qwen/Qwen2.5-3B-Instruct",
-        "ModeloInstalado?": true
+        "Modelo": "Qwen/Qwen2.5-Math-1.5B-Instruct"
     },
     "6": {
-        "Modelo": "Qwen/Qwen2.5-Math-1.5B-Instruct",
-        "ModeloInstalado?": true
+        "Modelo": "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B"
     },
     "7": {
-        "Modelo": "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
-        "ModeloInstalado?": true
+        "Modelo": "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
     },
     "8": {
-        "Modelo": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
-        "ModeloInstalado?": true
+        "Modelo": "meta-llama/Llama-3.2-1B-Instruct"
     },
     "9": {
-        "Modelo": "meta-llama/Llama-3.2-1B-Instruct",
-        "ModeloInstalado?": true
+        "Modelo": "meta-llama/Llama-3.2-3B-Instruct"
     },
     "10": {
-        "Modelo": "meta-llama/Llama-3.2-3B-Instruct",
-        "ModeloInstalado?": false
+        "Modelo": "microsoft/Phi-3-mini-4k-instruct"
     },
     "11": {
-        "Modelo": "microsoft/Phi-3-mini-4k-instruct",
-        "ModeloInstalado?": true
-    },
-    "12": {
-        "Modelo": "google/gemma-2-2b-it",
-        "ModeloInstalado?": true
+        "Modelo": "google/gemma-2-2b-it"
     }
 }

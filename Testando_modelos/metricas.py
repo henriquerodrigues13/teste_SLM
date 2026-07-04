@@ -86,7 +86,7 @@ class MetricasInferencia:
         return self.ram_pico_mb - self.ram_inicio_mb
 
     @property
-    def media_rodadas(self) -> dict:
+    def media_rodadas(self):
         tps_medio = sum(self.TPS_por_rodada) / len(self.TPS_por_rodada)
         ram_media = sum(self.ram_por_rodada) / len(self.ram_por_rodada)
         tempo_medio = sum(self.tempo_total_por_rodada) / len(self.tempo_total_por_rodada)

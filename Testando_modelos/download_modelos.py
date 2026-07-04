@@ -2,7 +2,7 @@ import os
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import json
 
-def baixando_modelo(modelo: str) -> str :
+def baixando_modelo(modelo: str):
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
     try:
@@ -29,12 +29,11 @@ def main():
     print("Escolha um modelo para baixar...")
     print("modelo:")
     for id, modelo in lista_modelos.items():
-        print(f"id {id} do modelo: {modelo['Modelo']}, modelo baixando: {"sim" if modelo['ModeloInstalado?'] else "não"}")
+        print(f"id {id} do modelo: {modelo['Modelo']}")
 
     print("digite -1 para voltar")
     id_modelo = str(input("Digite o id do modelo: "))
     if id_modelo != "-1":
         baixando_modelo(lista_modelos[id_modelo]['Modelo'])
-        lista_modelos[id_modelo]['ModeloInstalado?'] = True
         with open(caminho_json, 'w', encoding='utf-8') as arquivo:
             json.dump(lista_modelos, arquivo, indent=4)

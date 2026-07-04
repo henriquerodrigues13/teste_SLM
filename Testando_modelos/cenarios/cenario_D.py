@@ -3,6 +3,8 @@ from pathlib import Path
 
 import torch
 
+from Testando_modelos.valida_json import extrair_e_validar, parsear_json_bruto
+
 
 def cenario_d(modelo: str, tokenizer, model):
     prompt_sistema = (
@@ -86,7 +88,7 @@ def cenario_d(modelo: str, tokenizer, model):
             do_sample=True,
             temperature=0.7,
             top_p=0.9,
-            repetition_penalty=1.3,
+            repetition_penalty=1.1,
         )
 
     tokens_gerados = saida[0][inputs["input_ids"].shape[1]:]
@@ -98,15 +100,25 @@ def cenario_d(modelo: str, tokenizer, model):
 
     output_text = tokenizer.decode(tokens_gerados, skip_special_tokens=True)
 
+    valido, resultado_validado, erro = extrair_e_validar(output_text)
+
+    if valido:
+        output_final = resultado_validado.model_dump()
+    else:
+        output_final = {
+            "erro": erro,
+            "output_bruto": parsear_json_bruto(output_text)
+        }
+
     resultados = {
         "cenario_d": {
             "habilidades_testadas": ["EF08MA05", "EF06MA17"],
             "outputs": {
-                "EF08MA05" : output_text
+                "EF08MA05": output_final
             },
             "json_valido": {
-                "H3": None,
-                "H5": None
+                "EF08MA05": valido,
+                "EF06MA17": None
             }
         }
     }
@@ -192,7 +204,7 @@ def cenario_d(modelo: str, tokenizer, model):
             do_sample=True,
             temperature=0.7,
             top_p=0.9,
-            repetition_penalty=1.3,
+            repetition_penalty=1.1,
         )
 
     tokens_gerados = saida[0][inputs["input_ids"].shape[1]:]
@@ -204,7 +216,17 @@ def cenario_d(modelo: str, tokenizer, model):
 
     output_text = tokenizer.decode(tokens_gerados, skip_special_tokens=True)
 
-    resultados["cenario_d"]["outputs"]["EF06MA17"] = output_text
+    valido, resultado_validado, erro = extrair_e_validar(output_text)
+
+    if valido:
+        output_final = resultado_validado.model_dump()
+    else:
+        output_final = {
+            "erro": erro,
+            "output_bruto": parsear_json_bruto(output_text)
+        }
+
+    resultados["cenario_d"]["outputs"]["EF06MA17"] = output_final
 
     pasta_resultados = Path(__file__).parent.parent / "resultados"
     nome_arquivo = modelo.replace("/", "--")

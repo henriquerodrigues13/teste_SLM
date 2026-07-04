@@ -1,0 +1,28 @@
+{
+    "modelo": "Qwen/Qwen2.5-1.5B-Instruct",
+    "data": "01/07/2026",
+    "eliminado": true,
+    "motivo_eliminacao": "RAM usada pelo modelo 2823.6 MB — limite era 2048 MB",
+    "descrição": "O modelo respondeu com um output ate satisfatoria, mas fora do padrão aceito",
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": "RAM usada pelo modelo 2823.6 MB — limite era 2048 MB"
+    },
+    "cenario_a": {
+        "cold_start_segundos": "591.73 segundos",
+        "ram_idle_mb": "2823.6 MB"
+    },
+    "cenario_b": {
+        "rodadas": 10,
+        "json_validos": 1,
+        "json_invalidos": 0,
+        "taxa_json_valido_percent": 0.0,
+        "crashes_oom": 0,
+        "tps_medio": 2.19,
+        "ram_media_mb": 0.0,
+        "tempo_medio_por_rodada_segundos": 185.23,
+        "aprovado_crashes": true,
+        "aprovado_ram": true,
+        "aprovado_tempo": false
+    }
+}

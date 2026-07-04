@@ -94,11 +94,11 @@ def cenario_b(modelo: str, tokenizer, model, metricas):
             with torch.no_grad():
                 saida = model.generate(
                     **inputs,
-                    max_new_tokens=512,
+                    max_new_tokens=1024,
                     do_sample=True,
                     temperature=0.7,
                     top_p=0.9,
-                    repetition_penalty=1.3,
+                    repetition_penalty=1.1,
                 )
         except MemoryError:
             crashes_oom += 1
@@ -124,7 +124,7 @@ def cenario_b(modelo: str, tokenizer, model, metricas):
         else:
             json_invalidos += 1
         metricas.finalizar_rodada(tokens_gerados_por_rodada)
-    dados = metricas.media_rodadas()
+    dados = metricas.media_rodadas
     print("-" * 50)
     print("Relatório :")
     print(f"""  
@@ -136,6 +136,7 @@ def cenario_b(modelo: str, tokenizer, model, metricas):
       RAM média            : {dados['ram_media_mb']:.1f} MB
       Tempo médio/rodada   : {dados['tempo_medio_segundos']:.2f}s""")
     print("-" * 50)
+
 
     resultados = {
         "cenario_b": {

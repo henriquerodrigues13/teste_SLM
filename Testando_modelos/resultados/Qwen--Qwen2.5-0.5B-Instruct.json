@@ -1,0 +1,71 @@
+{
+    "modelo": "Qwen/Qwen2.5-0.5B-Instruct",
+    "data": "01/07/2026",
+    "eliminado": true,
+    "motivo_eliminacao": "Português incompreensível",
+    "descrição": "O modelo estruturou o json de maneira satisfatoria, no entanto não entregou de forma adequada",
+    "eliminacao_manual": {
+        "eliminado": "S",
+        "eliminado_por": "Português incompreensível"
+    },
+    "cenario_a": {
+        "cold_start_segundos": "107.67 segundos",
+        "ram_idle_mb": "816.2 MB"
+    },
+    "cenario_c": {
+        "execucoes": 3,
+        "quantidade_de_questoes": 5,
+        "tentativas": 3,
+        "valido_primeira_tentativa": false,
+        "precisou_retry": false,
+        "falhou_com_3_tentativas": true,
+        "aprovado": false
+    },
+    "cenario_d": {
+        "habilidades_testadas": [
+            "EF08MA05",
+            "EF06MA17"
+        ],
+        "outputs": {
+            "EF08MA05": {
+                "questoes": [
+                    {
+                        "enunciado": "Qual medida correspondente à área de um retângulo cujas dimensões são 6 cm x 4 cm?",
+                        "alternativas": {
+                            "A": "2 cm²",
+                            "B": "12 cm²",
+                            "C": "24 cm²",
+                            "D": "36 cm²",
+                            "E": "4 cm²"
+                        },
+                        "resposta_correta": "C",
+                        "resolucao_passo_a_passo": "Vamos resolver a questão:\n\nSabemos que a área de um retângulo é calculada pela multiplicação dos seus lados. Se os lados são 6 cm e 4 cm, então a área é igual a 6 x 4 = 24 cm².\nAgora, vamos ver qual é a opção que corresponde à área 24 cm².\n\nA resposta correta é '24 cm²'."
+                    }
+                ]
+            },
+            "EF06MA17": {
+                "erro": "Schema inválido: 1 validation error for GeneratedQuestionsResponse\nquestoes.0.resposta_correta\n  Input should be 'A', 'B', 'C', 'D' or 'E' [type=literal_error, input_value='4 metros', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error",
+                "output_bruto": {
+                    "questoes": [
+                        {
+                            "enunciado": "Uma parede tem uma área de 48 m² e está sendo reformulada para uma área quadrada de 32 m². Quanto a cada lado da nova parede será necessário cortar?",
+                            "alternativas": {
+                                "A": "2 metros",
+                                "B": "4 metros",
+                                "C": "8 metros",
+                                "D": "16 metros",
+                                "E": "32 metros"
+                            },
+                            "resposta_correta": "4 metros",
+                            "resolucao_passo_a_passo": "1. Primeiro, identifique a medida da área original da parede (48 m²)."
+                        }
+                    ]
+                }
+            }
+        },
+        "json_valido": {
+            "EF08MA05": true,
+            "EF06MA17": null
+        }
+    }
+}
