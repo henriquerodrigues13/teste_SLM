@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 import torch
-from Testando_modelos.valida_json import extrair_e_validar
+from Testando_modelos.valida_json import extrair_e_validar, validar_quantidade
 from Testando_modelos.instrucao.instrucao_b import seletor_de_questao
 
 
@@ -274,12 +274,18 @@ def cenario_b_gguf(llm, modelo, metricas):
         valido, resultado, erro = extrair_e_validar(output_text)
 
         if valido:
+            quantidade_ok, erro_quantidade = validar_quantidade(resultado, 3)
+            if not quantidade_ok:
+                valido = False
+                erro = erro_quantidade
+
+        if valido:
             json_validos += 1
         else:
             json_invalidos += 1
 
         metricas.finalizar_rodada(tokens_gerados_por_rodada)
-        break
+
     dados = metricas.media_rodadas
     print("-" * 50)
     print("Relatório :")
@@ -298,7 +304,7 @@ def cenario_b_gguf(llm, modelo, metricas):
             "rodadas": 10,
             "json_validos": json_validos,
             "json_invalidos": json_invalidos,
-            "taxa_json_valido_percent": round(json_validos / 100, 1),
+            "taxa_json_valido_percent": round(json_validos / 10, 1),
             "crashes_oom": crashes_oom,
             "tps_medio": round(dados["tps_medio"], 2),
             "ram_media_mb": round(dados["ram_media_mb"], 1),
@@ -339,10 +345,8 @@ def cenario_b_gguf(llm, modelo, metricas):
             degradacao = (tps_inicial - tps_final) / tps_inicial * 100
             if degradacao > 40:
                 dados_existentes["eliminado"] = True
-                dados_existentes[
-                    "motivo_eliminacao"] = f"Degradação de TPS severa: {degradacao:.1f}% entre 1ª e 10ª geração"
+                dados_existentes["motivo_eliminacao"] = f"Degradação de TPS severa: {degradacao:.1f}% entre 1ª e 10ª geração"
 
     with open(arquivo, "w", encoding="utf-8") as f:
         json.dump(dados_existentes, f, indent=4, ensure_ascii=False)
 
-    x = input()

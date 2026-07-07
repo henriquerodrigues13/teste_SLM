@@ -1,0 +1,17 @@
+{
+    "modelo": "microsoft/Phi-3-mini-4k-instruct-gguf",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "Português incompreensível",
+    "cenario_a": {
+        "cold_start_segundos": 56.92,
+        "ram_idle_mb": 808.6,
+        "ram_usada_mb": 1900.8,
+        "tokens_por_segundo": 3.42
+    },
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": "Português incompreensível"
+    },
+    "descrição": "O modelo não entregou a reposta em um formato json"
+}

@@ -24,11 +24,11 @@ def extrair_e_validar(texto: str) -> tuple[bool, GeneratedQuestionsResponse | No
             return True, resultado, None
 
         except json.JSONDecodeError as e:
-            ultimo_erro = f"JSON inválido: {e}"
+            ultimo_erro = "JSON inválido"
             continue
 
         except Exception as e:
-            ultimo_erro = f"Schema inválido: {e}"
+            ultimo_erro = "Schema inválido"
             continue
 
     return False, None, ultimo_erro or "Nenhum candidato de JSON válido encontrado"
@@ -42,3 +42,12 @@ def parsear_json_bruto(texto: str) -> dict | str:
         return json.loads(json_str)
     except json.JSONDecodeError:
         return texto
+
+
+def validar_quantidade(resultado, quantidade_esperada: int) -> tuple[bool, str | None]:
+    quantidade_real = len(resultado.questoes)
+
+    if quantidade_real != quantidade_esperada:
+        return False, f"Esperado {quantidade_esperada} questões, modelo gerou {quantidade_real}"
+
+    return True, None

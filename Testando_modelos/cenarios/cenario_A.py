@@ -198,8 +198,8 @@ def cenario_a_gguf(llm, modelo, metricas):
     resposta = llm.create_chat_completion(
         messages=mensagens,
         max_tokens=512,
-        temperature=0.7,
-        top_p=0.9,
+        temperature=0,
+        top_p=1,
         repeat_penalty=1.1,
     )
 

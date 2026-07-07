@@ -4,27 +4,56 @@
     "eliminado": true,
     "motivo_eliminacao": "Português incompreensível",
     "cenario_a": {
-        "cold_start_segundos": 9.42,
-        "ram_idle_mb": 385.4,
-        "ram_usada_mb": 253.2,
-        "tokens_por_segundo": 11.99
+        "cold_start_segundos": 11.1,
+        "ram_idle_mb": 386.2,
+        "ram_usada_mb": 240.5,
+        "tokens_por_segundo": 18.78
     },
     "eliminacao_manual": {
         "eliminado": true,
         "eliminado_por": "Português incompreensível"
     },
-    "descrição": null,
+    "descrição": "O modelo conseguiu estrutura o json da forma esperada, mas não entregou uma questão com uso falha nas altenativas ",
     "cenario_b": {
         "rodadas": 10,
-        "json_validos": 0,
-        "json_invalidos": 1,
-        "taxa_json_valido_percent": 0.0,
+        "json_validos": 2,
+        "json_invalidos": 8,
+        "taxa_json_valido_percent": 0.2,
         "crashes_oom": 0,
-        "tps_medio": 24.35,
-        "ram_media_mb": 639.1,
-        "tempo_medio_por_rodada_segundos": 18.03,
+        "tps_medio": 23.89,
+        "ram_media_mb": 65.7,
+        "tempo_medio_por_rodada_segundos": 18.96,
         "aprovado_crashes": true,
         "aprovado_ram": true,
         "aprovado_tempo": true
+    },
+    "cenario_c": {
+        "execucoes": 3,
+        "quantidade_de_questoes": 5,
+        "tentativas": 3,
+        "valido_primeira_tentativa": false,
+        "precisou_retry": false,
+        "falhou_com_3_tentativas": true,
+        "aprovado": false
+    },
+    "cenario_d": {
+        "habilidades_testadas": [
+            "EF08MA05",
+            "EF06MA17"
+        ],
+        "outputs": {
+            "EF08MA05": {
+                "erro": "JSON inválido",
+                "output_bruto": "{\n    \"questoes\": [\n        {\n            \"enunciado\": \"...\",\n            \"alternativas\": {\n                \"A\": \"...\",\n                \"B\": \"...\",\n                \"C\": \"...\",\n                \"D\": \"...\",\n                \"E\": \"\"\n            },\n            \"resposta_correta\": \"A\",\n            \"resolucao_passo_a_passo\": \"1. Identifique uma forma de equilíbrio geométrico para um triângulo cujo lado médio é igual a 4 cm. A forma deve ser uma figura que permite esta equilíbrio. Seu enunciado: Uma forma de equilíbrio geométrico para um triângulo cujo lado médio é igual a 4 cm, é a circunferência. Esta figura é chamada 'Circumference'.\"\n            }\n        }\n    ]\n}"
+            },
+            "EF06MA17": {
+                "erro": "JSON não encontrado na resposta",
+                "output_bruto": "{\n    \"questoes\": [\n        {\n            \"enunciado\": \"Uma equação de segundo grau é de forma a x² + bx + c = 0. Se a equação está em ordem inversa, que valores podem ser obtidos com base na informação seguinte?\"\n            \"alternativas\": [\n                \"1\", \n                \"-2\", \n                \"3\", \n                \"4\",\n                \"\"\n            ],\n            \"resposta_correta\": \"-2\"\n        },\n        {\n            \"enunciado\": \"Quanto a uma equação de segundo grau, se o valor do coeficiente b é zero, qual é a forma geral para o valor de c?\"\n            \"alternativas\": [\n                \"0\",\n                \"1\", \n                \"3\", \n                \"4\",\n                \"\"\n            ],\n            \"resposta_correta\": \"0\"\n        },\n        {\n            \"enunciado\": \"Uma equação de segundo grau pode ser escrita como x² + bx + c = 0. Qual é o valor de b para que a equação se complete com zeros?\"\n            \"alternativas\": [\n                \"1\", \n                \"-2\", \n                \"3\", \n                \"4\",\n                \"\"\n            ],\n            \"resposta_correta\": \"-2\"\n        },\n        {\n            \"enunciado\": \"Uma equação de segundo grau é de forma a x² + bx + c = 0. Se o coeficiente b for positivo, qual é o valor de c?\"\n            \"alternativas\": [\n                \"0\",\n                \"1\", \n                \"-3\", \n                \"-4\",\n                \"\"\n            ],\n            \"resposta_correta\": \"-4\"\n        },\n        {\n            \"enunciado\": \"Uma equação de segundo grau é de forma a x² + bx + c = 0. Se o valor do coeficiente b for negativo, qual é o valor de c?\"\n            \"alternativas\": [\n                \"0\",\n                \"-1\", \n                \"-3\", \n                \"-4\",\n                \"\"\n            ],\n            \"resposta_correta\": \"-4\"\n        },\n        {\n            \"enunciado\": \"Uma equação de segundo grau é de forma a x² + bx + c = 0. Se o valor do coeficiente b for zero, qual é o valor de c?\"\n            \"alternativas\": [\n                \"1\", \n                \"-2\","
+            }
+        },
+        "json_valido": {
+            "EF08MA05": false,
+            "EF06MA17": false
+        }
     }
 }

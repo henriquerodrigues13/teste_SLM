@@ -1,0 +1,17 @@
+{
+    "modelo": "HuggingFaceTB/SmolLM2-1.7B-Instruct-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "Português incompreensível",
+    "cenario_a": {
+        "cold_start_segundos": 50.22,
+        "ram_idle_mb": 457.3,
+        "ram_usada_mb": 962.9,
+        "tokens_por_segundo": 3.59
+    },
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": "Português incompreensível"
+    },
+    "descrição": "O modelo respondeu em um json valido a primeira vista, mas então entregou uma resolução passo a passo e tambem as altenativas não tem relação com o comando da questão"
+}

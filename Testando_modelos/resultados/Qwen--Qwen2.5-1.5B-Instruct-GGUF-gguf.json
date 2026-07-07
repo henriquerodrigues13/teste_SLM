@@ -1,0 +1,95 @@
+{
+    "modelo": "Qwen/Qwen2.5-1.5B-Instruct-GGUF",
+    "formato": "gguf",
+    "eliminado": false,
+    "motivo_eliminacao": null,
+    "cenario_a": {
+        "cold_start_segundos": 33.5,
+        "ram_idle_mb": 138.6,
+        "ram_usada_mb": 1025.7,
+        "tokens_por_segundo": 6.25
+    },
+    "eliminacao_manual": {
+        "eliminado": false,
+        "eliminado_por": null
+    },
+    "descrição": "o modelo responde em um json valido, com uma estruturação de questão satisfatorio mesmo com a questão errada",
+    "cenario_b": {
+        "rodadas": 10,
+        "json_validos": 7,
+        "json_invalidos": 3,
+        "taxa_json_valido_percent": 0.7,
+        "crashes_oom": 0,
+        "tps_medio": 10.6,
+        "ram_media_mb": 180.0,
+        "tempo_medio_por_rodada_segundos": 42.73,
+        "aprovado_crashes": true,
+        "aprovado_ram": true,
+        "aprovado_tempo": true
+    },
+    "cenario_c": {
+        "execucoes": 1,
+        "quantidade_de_questoes": 5,
+        "tentativas": 0,
+        "valido_primeira_tentativa": true,
+        "precisou_retry": false,
+        "falhou_com_3_tentativas": false,
+        "aprovado": true
+    },
+    "cenario_d": {
+        "habilidades_testadas": [
+            "EF08MA05",
+            "EF06MA17"
+        ],
+        "outputs": {
+            "EF08MA05": {
+                "erro": "Schema inválido",
+                "output_bruto": {
+                    "questoes": [
+                        {
+                            "enunciado": "Em um quadrilátero convexo ABCD, se AB = CD e ∠BAC + ∠DAC = 180°, qual é a medida de ∠ADC?",
+                            "alternativas": {
+                                "A": "90°",
+                                "B": "135°",
+                                "C": "45°",
+                                "D": "67.5°",
+                                "E": "120°"
+                            },
+                            "resposta_correta": "D",
+                            "resolucao_passo_a_passo": [
+                                "Identificar a regi�a do quadrilátero convexo ABCD.",
+                                "Aplicar a propriedade que AB = CD e ∠BAC + ∠DAC = 180°.",
+                                "Concluir que ∠ADC é um interior do quadrilátero com medidas igualmente lógicas para o cálculo."
+                            ]
+                        }
+                    ]
+                }
+            },
+            "EF06MA17": {
+                "erro": "Schema inválido",
+                "output_bruto": {
+                    "questoes": [
+                        {
+                            "enunciado": "A área de um círculo é dada por: A. \\pi r^2 B. 4πr^2 C. πd^2 D. 2πr^2 E. πr",
+                            "alternativas": {
+                                "A": "\\pi r^2",
+                                "B": "4\\pi r^2",
+                                "C": "πd^2",
+                                "D": "2πr^2",
+                                "E": "πr"
+                            },
+                            "resposta_correta": "D",
+                            "resolucao_passo_a_passo": [
+                                "\\text{Onde } r \\text{ é a medida da razão entre o radio e diametro do círculo, então:}\\n\\n1. A área de um círculo é dada por} & = πr^2 \\\\\n\\text{2. Portanto, a resposta correta é:} & = 2πr^2"
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "json_valido": {
+            "EF08MA05": false,
+            "EF06MA17": false
+        }
+    }
+}

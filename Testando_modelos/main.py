@@ -26,7 +26,6 @@ def modelo_eliminado(modelo: str, formato: str = "safetensors") -> bool:
     return dados.get("eliminado", False) or dados.get("eliminacao_manual", {}).get("eliminado", False)
 
 while True:
-    os.system("cls")
     print("O que vc quer fazer")
     print("0 - Sair")
     print("1 - baixar modelo")
@@ -115,20 +114,22 @@ while True:
 
         metricas.tempo_load_modelo_final()
         print(f"Pronto! modelo: {modelo_id} carregado em {metricas.tempo_carregamento_modelo:.2f}s")
-        #cenario_A.cenario_a_gguf(llm, modelo_id, metricas)
-        #if modelo_eliminado(lista_modelos[x]['Modelo'], formato="gguf"):
-            #print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
-            #continue
+        print("Iniciando cenario A: Stard Cold ...")
+        cenario_A.cenario_a_gguf(llm, modelo_id, metricas)
+        if modelo_eliminado(lista_modelos[x]['Modelo'], formato="gguf"):
+            print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
+            continue
+        print("Iniciando cenario B: Geração em Série ...")
         cenario_B.cenario_b_gguf(llm, modelo_id, metricas)
         if modelo_eliminado(lista_modelos[x]['Modelo'], formato="gguf"):
             print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
             continue
-        #cenario_C.cenario_c_gguf(llm, modelo_id, metricas)
-        #if modelo_eliminado(lista_modelos[x]['Modelo'], formato="gguf"):
-            #print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
-            #continue
-        #cenario_D.cenario_d_gguf(llm, modelo_id, metricas)
-        #if modelo_eliminado(lista_modelos[x]['Modelo'], formato="gguf"):
-            #print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
-            #continue
+        print("Iniciando cenario C: Pressão de JSON em Português ...")
+        cenario_C.cenario_c_gguf(llm, modelo_id)
+        if modelo_eliminado(lista_modelos[x]['Modelo'], formato="gguf"):
+            print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
+            continue
+        print("Iniciando cenario D: Sem Contexto BNCC ...")
+        cenario_D.cenario_d_gguf(llm, modelo_id)
+        print("testes finalizado")
 
