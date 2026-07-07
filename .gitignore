@@ -243,3 +243,4 @@ SECURITY_INCIDENT.md
 *.pfx
 
 /Testando_modelos/modelos_local/*
+/Testando_modelos/modelos_local_gguf/*

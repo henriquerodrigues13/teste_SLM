@@ -1,0 +1,30 @@
+{
+    "modelo": "Qwen/Qwen2.5-0.5B-Instruct-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "Português incompreensível",
+    "cenario_a": {
+        "cold_start_segundos": 9.42,
+        "ram_idle_mb": 385.4,
+        "ram_usada_mb": 253.2,
+        "tokens_por_segundo": 11.99
+    },
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": "Português incompreensível"
+    },
+    "descrição": null,
+    "cenario_b": {
+        "rodadas": 10,
+        "json_validos": 0,
+        "json_invalidos": 1,
+        "taxa_json_valido_percent": 0.0,
+        "crashes_oom": 0,
+        "tps_medio": 24.35,
+        "ram_media_mb": 639.1,
+        "tempo_medio_por_rodada_segundos": 18.03,
+        "aprovado_crashes": true,
+        "aprovado_ram": true,
+        "aprovado_tempo": true
+    }
+}

@@ -2,8 +2,8 @@ import datetime
 import json
 from pathlib import Path
 import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM
 from Testando_modelos.instrucao.instrucao_a import instrucao
+
 
 def cenario_a(modelo: str, tokenizer, model, metricas):
 
@@ -138,3 +138,123 @@ def cenario_a(modelo: str, tokenizer, model, metricas):
 
     with open(pasta_resultados / f"{nome_arquivo}.json", "w", encoding="utf-8") as arquivo:
         json.dump(resultados, arquivo, indent=4, ensure_ascii=False)
+
+
+def cenario_a_gguf(llm, modelo, metricas):
+
+    mensagens = [
+        {"role": "system", "content": """Você é um especialista sênior em elaboração de itens avaliativos de Matemática para o Ensino Fundamental (1º ao 9º ano), com domínio profundo da Base Nacional Comum Curricular (BNCC).
+
+        Suas responsabilidades:
+        - Criar questões de múltipla escolha (5 alternativas: A, B, C, D, E) rigorosamente alinhadas à habilidade da BNCC solicitada.
+        - Garantir que o enunciado seja claro, contextualizado e adequado à faixa etária do estudante.
+        - Produzir alternativas plausíveis e com distratores pedagogicamente fundamentados (erros comuns dos alunos, não respostas absurdas).
+        - Redigir a resolução passo a passo de forma didática, como faria um professor explicando para o aluno.
+        - Calibrar a dificuldade respeitando os pré-requisitos informados: os conceitos listados em pré-requisitos devem ser dominados pelo aluno, e NÃO devem ser o foco central da questão — use-os como base para atingir a habilidade-alvo.
+        - Manter consistência de estilo, formato e nível de abstração com os exemplos fornecidos (few-shot).
+
+        Regras absolutas:
+        - Retorne SOMENTE o JSON estruturado solicitado, sem texto adicional, markdown ou explicações fora do JSON.
+        - Todas as questões devem ser inéditas entre si na mesma resposta.
+        - A resposta correta deve ser distribuída de forma variada entre A, B, C, D e E ao longo das questões.
+        
+        Retorne SOMENTE um JSON com esta estrutura exata:
+        {
+            "questoes": [
+                {
+                    "enunciado": "...",
+                    "alternativas": {
+                        "A": "...",
+                        "B": "...",
+                        "C": "...",
+                        "D": "...",
+                        "E": "..."
+                    },
+                    "resposta_correta": "A",
+                    "resolucao_passo_a_passo": "..."
+                }
+            ]
+        }
+        
+        O campo "resolucao_passo_a_passo" é OBRIGATÓRIO. Liste apenas os passos de cálculo numerados, no formato "expressão = resultado". Sem texto introdutório, sem explicações teóricas, sem conclusão."""},
+        {"role": "user", "content": f"""
+        Gere exatamente {instrucao["quantity"]} questão(ões) de múltipla escolha para a seguinte habilidade da BNCC:
+
+        **Habilidade:** {instrucao["habilidadeContext"]["habilidadeId"]}
+        **Unidade Temática:** {instrucao["habilidadeContext"]["unidadeTematica"]["nome"]}
+
+        **Pré-requisitos que o aluno já deve dominar (calibração de dificuldade):**
+        {", ".join(instrucao["habilidadeContext"]["prerequisites"]) if instrucao["habilidadeContext"]["prerequisites"] else "Não especificada."}
+
+        **Exemplos de questões existentes para esta habilidade (mantenha consistência de estilo):**
+        {"Exemplo 1: " + instrucao["habilidadeContext"]["examples"][0]["enunciado"]}
+
+        Gere {instrucao["quantity"]} questão(ões) novas, inéditas e alinhadas à habilidade {instrucao["habilidadeContext"]["habilidadeId"]}.
+        """}
+    ]
+
+    metricas.iniciar(0)
+
+    resposta = llm.create_chat_completion(
+        messages=mensagens,
+        max_tokens=512,
+        temperature=0.7,
+        top_p=0.9,
+        repeat_penalty=1.1,
+    )
+
+    tokens_saida = resposta["usage"]["completion_tokens"]
+    tokens_entrada = resposta["usage"]["prompt_tokens"]
+
+    metricas.tokens_entrada = tokens_entrada
+    metricas.finalizar(tokens_saida)
+
+    output_text = resposta["choices"][0]["message"]["content"]
+
+    print("output:")
+    print("-" * 50)
+    print(output_text)
+    print("-" * 50)
+    print(metricas.relatorio())
+    print("-" * 50)
+
+    resultados = {
+        "cenario_a": {
+            "cold_start_segundos": round(metricas.tempo_carregamento_modelo + metricas.tempo_total, 2),
+            "ram_idle_mb": round(metricas.ram_inicio_mb, 1),
+            "ram_usada_mb": round(metricas.ram_usada_mb, 1),
+            "tokens_por_segundo": round(metricas.tokens_por_segundo, 2),
+        }
+    }
+
+    pasta_resultados = Path(__file__).parent.parent / "resultados"
+    pasta_resultados.mkdir(exist_ok=True)
+    nome_arquivo = modelo.replace("/", "--") + "-gguf"
+    arquivo = pasta_resultados / f"{nome_arquivo}.json"
+
+    dados_existentes = {"modelo": modelo, "formato": "gguf", "eliminado": False, "motivo_eliminacao": None}
+    if arquivo.exists():
+        with open(arquivo, "r", encoding="utf-8") as f:
+            dados_existentes = json.load(f)
+
+    dados_existentes["cenario_a"] = resultados["cenario_a"]
+
+    if metricas.ram_usada_mb > 2048:
+        dados_existentes["eliminado"] = True
+        dados_existentes["motivo_eliminacao"] = f"RAM usada pelo modelo {metricas.ram_usada_mb:.1f} MB — limite era 2048 MB"
+        dados_existentes["eliminacao_manual"] = {"eliminado": True, "eliminado_por": None}
+    else:
+        print("avaliação manual")
+        resposta = input(f"O modelo {modelo} está eliminado? [S ou N]: ")
+
+        if resposta.upper() == "S":
+            dados_existentes["eliminado"] = True
+            dados_existentes["motivo_eliminacao"] = "Português incompreensível"
+            dados_existentes["eliminacao_manual"] = {"eliminado": True, "eliminado_por": "Português incompreensível"}
+        else:
+            dados_existentes["eliminacao_manual"] = {"eliminado": False, "eliminado_por": None}
+    descricao = input("Descrição adicional (opcional, Enter pra pular): ")
+    dados_existentes["descrição"] = descricao if descricao else None
+
+    with open(arquivo, "w", encoding="utf-8") as f:
+        json.dump(dados_existentes, f, indent=4, ensure_ascii=False)

@@ -1,0 +1,57 @@
+{
+    "0": {
+        "Modelo": "Qwen/Qwen2.5-3B-Instruct-GGUF",
+        "Arquivo": "qwen2.5-3b-instruct-q4_k_m.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "1": {
+        "Modelo": "HuggingFaceTB/SmolLM2-1.7B-Instruct-GGUF",
+        "Arquivo": "smollm2-1.7b-instruct-q4_k_m.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "2": {
+        "Modelo": "Qwen/Qwen2.5-0.5B-Instruct-GGUF",
+        "Arquivo": "qwen2.5-0.5b-instruct-q4_k_m.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "3": {
+        "Modelo": "Qwen/Qwen2.5-1.5B-Instruct-GGUF",
+        "Arquivo": "qwen2.5-1.5b-instruct-q4_k_m.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "4": {
+        "Modelo": "bartowski/Qwen2.5-Math-1.5B-Instruct-GGUF",
+        "Arquivo": "Qwen2.5-Math-1.5B-Instruct-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "5": {
+        "Modelo": "bartowski/DeepSeek-R1-Distill-Qwen-1.5B-GGUF",
+        "Arquivo": "DeepSeek-R1-Distill-Qwen-1.5B-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "6": {
+        "Modelo": "TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF",
+        "Arquivo": "tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "7": {
+        "Modelo": "bartowski/Llama-3.2-1B-Instruct-GGUF",
+        "Arquivo": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "8": {
+        "Modelo": "unsloth/Llama-3.2-3B-Instruct-GGUF",
+        "Arquivo": "Llama-3.2-3B-Instruct-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "9": {
+        "Modelo": "google/gemma-2-2b-it-GGUF",
+        "Arquivo": "2b_it_v2.gguf",
+        "Quantizacao": "F32/verificar"
+    },
+    "10": {
+        "Modelo": "microsoft/Phi-3-mini-4k-instruct-gguf",
+        "Arquivo": "Phi-3-mini-4k-instruct-q4.gguf",
+        "Quantizacao": "Q4"
+    }
+}
