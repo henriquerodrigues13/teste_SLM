@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-import torch
+#import torch
 from Testando_modelos.instrucao.instrucao_b import seletor_de_questao
 from Testando_modelos.valida_json import extrair_e_validar, validar_quantidade
 
@@ -254,7 +254,7 @@ def cenario_c_gguf(llm, modelo):
         }
     }
 
-    pasta_resultados = Path(__file__).parent.parent / "resultados"
+    pasta_resultados = Path(__file__).parent.parent / "resultados_gguf"
     nome_arquivo = modelo.replace("/", "--") + "-gguf"
     arquivo = pasta_resultados / f"{nome_arquivo}.json"
 

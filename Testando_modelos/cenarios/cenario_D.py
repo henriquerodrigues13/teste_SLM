@@ -1,8 +1,6 @@
 import json
 from pathlib import Path
-
-import torch
-
+#import torch
 from Testando_modelos.valida_json import extrair_e_validar, parsear_json_bruto
 
 
@@ -413,7 +411,7 @@ def cenario_d_gguf(llm, modelo):
 
     resultados["cenario_d"]["outputs"]["EF06MA17"] = output_final
 
-    pasta_resultados = Path(__file__).parent.parent / "resultados"
+    pasta_resultados = Path(__file__).parent.parent / "resultados_gguf"
     nome_arquivo = modelo.replace("/", "--") + "-gguf"
     arquivo = pasta_resultados / f"{nome_arquivo}.json"
 

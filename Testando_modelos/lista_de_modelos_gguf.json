@@ -53,5 +53,55 @@
         "Modelo": "microsoft/Phi-3-mini-4k-instruct-gguf",
         "Arquivo": "Phi-3-mini-4k-instruct-q4.gguf",
         "Quantizacao": "Q4"
+    },
+    "11": {
+        "Modelo": "bartowski/HuggingFaceTB_SmolLM3-3B-GGUF",
+        "Arquivo": "HuggingFaceTB_SmolLM3-3B-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "12": {
+        "Modelo": "bartowski/google_gemma-3-4b-it-GGUF",
+        "Arquivo": "google_gemma-3-4b-it-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "13": {
+        "Modelo": "bartowski/Phi-3.5-mini-instruct-GGUF",
+        "Arquivo": "Phi-3.5-mini-instruct-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "14": {
+        "Modelo": "bartowski/granite-3.0-2b-instruct-GGUF",
+        "Arquivo": "granite-3.0-2b-instruct-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "15": {
+        "Modelo": "bartowski/Mistral-7B-Instruct-v0.3-GGUF",
+        "Arquivo": "Mistral-7B-Instruct-v0.3-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "16": {
+        "Modelo": "bartowski/Meta-Llama-3.1-8B-Instruct-GGUF",
+        "Arquivo": "Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "17": {
+        "Modelo": "ibm-granite/granite-3.0-8b-instruct-GGUF",
+        "Arquivo": "granite-3.0-8b-instruct-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "18": {
+        "Modelo": "bartowski/WizardLMTeam_WizardMath-7B-V1.0-GGUF",
+        "Arquivo": "WizardMath-7B-V1.0-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "19": {
+        "Modelo": "bartowski/gemma-7b-it-GGUF",
+        "Arquivo": "gemma-7b-it-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "20": {
+        "Modelo": "Qwen/Qwen2.5-7B-Instruct-GGUF",
+        "Arquivo": "qwen2.5-7b-instruct-q4_k_m.gguf",
+        "Quantizacao": "Q4_K_M"
     }
 }

@@ -1,0 +1,30 @@
+{
+    "modelo": "bartowski/Llama-3.2-1B-Instruct-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "O modelo teve um percentual de json estruturados de 10% no cenário B",
+    "cenario_a": {
+        "cold_start_segundos": 19.94,
+        "ram_idle_mb": 436.0,
+        "ram_usada_mb": 916.1,
+        "tokens_por_segundo": 10.17
+    },
+    "eliminacao_manual": {
+        "eliminado": false,
+        "eliminado_por": null
+    },
+    "descrição": "O modelo respondeu em um forma json, mas questão não faz sentido, no entanto irei vê o resultados dos demais testes",
+    "cenario_b": {
+        "rodadas": 10,
+        "json_validos": 1,
+        "json_invalidos": 9,
+        "taxa_json_valido_percent": 0.1,
+        "crashes_oom": 0,
+        "tps_medio": 18.12,
+        "ram_media_mb": 29.3,
+        "tempo_medio_por_rodada_segundos": 27.09,
+        "aprovado_crashes": true,
+        "aprovado_ram": true,
+        "aprovado_tempo": true
+    }
+}

@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-import torch
+#import torch
 from Testando_modelos.valida_json import extrair_e_validar, validar_quantidade
 from Testando_modelos.instrucao.instrucao_b import seletor_de_questao
 
@@ -249,7 +249,7 @@ def cenario_b_gguf(llm, modelo, metricas):
         try:
             resposta = llm.create_chat_completion(
                 messages=mensagens,
-                max_tokens=512,
+                max_tokens=1024,
                 temperature=0.7,
                 top_p=0.9,
                 repeat_penalty=1.1,
@@ -315,7 +315,7 @@ def cenario_b_gguf(llm, modelo, metricas):
         }
     }
 
-    pasta_resultados = Path(__file__).parent.parent / "resultados"
+    pasta_resultados = Path(__file__).parent.parent / "resultados_gguf"
     nome_arquivo = modelo.replace("/", "--") + "-gguf"
     arquivo = pasta_resultados / f"{nome_arquivo}.json"
 

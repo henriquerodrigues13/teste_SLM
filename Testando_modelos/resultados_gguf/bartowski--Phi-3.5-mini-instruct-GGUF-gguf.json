@@ -1,0 +1,95 @@
+{
+    "modelo": "bartowski/Phi-3.5-mini-instruct-GGUF",
+    "formato": "gguf",
+    "eliminado": false,
+    "motivo_eliminacao": null,
+    "cenario_a": {
+        "cold_start_segundos": 152.35,
+        "ram_idle_mb": 1177.2,
+        "ram_usada_mb": 1699.4,
+        "tokens_por_segundo": 2.95
+    },
+    "eliminacao_manual": {
+        "eliminado": false,
+        "eliminado_por": null
+    },
+    "descrição": "O modelo responde forma satifatoria e em json bem estruruado, so unico ponto a destaca é a questão do tempo para ser gerado a questão",
+    "cenario_b": {
+        "rodadas": 10,
+        "json_validos": 1,
+        "json_invalidos": 9,
+        "taxa_json_valido_percent": 0.1,
+        "crashes_oom": 0,
+        "tps_medio": 5.36,
+        "ram_media_mb": 195.6,
+        "tempo_medio_por_rodada_segundos": 124.52,
+        "aprovado_crashes": true,
+        "aprovado_ram": true,
+        "aprovado_tempo": false
+    },
+    "cenario_c": {
+        "execucoes": 3,
+        "quantidade_de_questoes": 5,
+        "tentativas": 3,
+        "valido_primeira_tentativa": false,
+        "precisou_retry": false,
+        "falhou_com_3_tentativas": true,
+        "aprovado": false
+    },
+    "cenario_d": {
+        "habilidades_testadas": [
+            "EF08MA05",
+            "EF06MA17"
+        ],
+        "outputs": {
+            "EF08MA05": {
+                "erro": "Schema inválido",
+                "output_bruto": {
+                    "questoes": [
+                        {
+                            "enunciado": "Um triângulo tem lados com comprimentos de 6 cm, 8 cm e 10 cm. Determine se este é um triângulo retângulo usando o teorema de Pitágoras.",
+                            "alternativas": {
+                                "A": "Sim, porque 6^2 + 8^2 = 10^2",
+                                "B": "Não, porque 6^2 + 8^2 > 10^2",
+                                "C": "Sim, porque 6^2 + 8^2 < 10^2",
+                                "D": "Não, porque todos os lados são iguales",
+                                "E": "Sim, mas não por causa do teorema de Pitágoras"
+                            },
+                            "resposta_correta": "A",
+                            "resolucao_passo_a_passo": [
+                                "Expressão 1: Calcule o quadrado dos lados oposto e adjacente ao ângulo reto (6^2 + 8^2)",
+                                "Calculação da Expressão 1: 36 + 64 = 100",
+                                "Comparar com a hipotenusa elevada ao quadrado (10^2)",
+                                "Avaliação: Como 100 é igual à soma dos outros dois lados quando elevados ao quadrado, segue-se pelo teorema de Pitágoras que este é um triângulo retângulo."
+                            ]
+                        }
+                    ]
+                }
+            },
+            "EF06MA17": {
+                "erro": "Schema inválido",
+                "output_bruto": {
+                    "questoes": [
+                        {
+                            "enunciado": "Um triângulo retângulo tem comprimentos de lados 3 cm, 4 cm e 5 cm. Qual é a área deste triângulo?",
+                            "alternativas": {
+                                "A": "9 cm²",
+                                "B": "6 cm²",
+                                "C": "12 cm²",
+                                "D": "7 cm²",
+                                "E": "5 cm²"
+                            },
+                            "resposta_correta": "A",
+                            "resolucao_passo_a_passo": ["Identifique o triângulo retângulo com lados 3, 4 e 5.", "Use a fórmula para área de um triângulo: (base * altura) / 2", "Substitua os comprimentos dados na fórmula: (3 cm * 4 cm) / 2 = ", "9 cm²"
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "json_valido": {
+            "EF08MA05": false,
+            "EF06MA17": false
+        }
+    }
+}

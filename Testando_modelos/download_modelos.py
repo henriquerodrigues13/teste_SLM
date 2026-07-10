@@ -1,5 +1,5 @@
 import os
-from transformers import AutoTokenizer, AutoModelForCausalLM
+#from transformers import AutoTokenizer, AutoModelForCausalLM
 import json
 
 def baixando_modelo(modelo: str):

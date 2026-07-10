@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 from time import sleep
 from llama_cpp import Llama
-from transformers import AutoTokenizer, AutoModelForCausalLM
+#from transformers import AutoTokenizer, AutoModelForCausalLM
 from Testando_modelos import download_modelos, download_modelos_gguf
 from Testando_modelos.cenarios import cenario_A, cenario_B, cenario_C, cenario_D
 from Testando_modelos.metricas import MetricasInferencia
@@ -15,7 +15,7 @@ def modelo_eliminado(modelo: str, formato: str = "safetensors") -> bool:
     if formato == "gguf":
         nome_arquivo += "-gguf"
 
-    arquivo = Path(__file__).parent / "resultados" / f"{nome_arquivo}.json"
+    arquivo = Path(__file__).parent / "resultados_gguf" / f"{nome_arquivo}.json"
 
     if not arquivo.exists():
         return False
@@ -25,6 +25,7 @@ def modelo_eliminado(modelo: str, formato: str = "safetensors") -> bool:
 
     return dados.get("eliminado", False) or dados.get("eliminacao_manual", {}).get("eliminado", False)
 
+os.system("cls")
 while True:
     print("O que vc quer fazer")
     print("0 - Sair")
@@ -114,22 +115,22 @@ while True:
 
         metricas.tempo_load_modelo_final()
         print(f"Pronto! modelo: {modelo_id} carregado em {metricas.tempo_carregamento_modelo:.2f}s")
-        print("Iniciando cenario A: Stard Cold ...")
-        cenario_A.cenario_a_gguf(llm, modelo_id, metricas)
-        if modelo_eliminado(lista_modelos[x]['Modelo'], formato="gguf"):
-            print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
-            continue
-        print("Iniciando cenario B: Geração em Série ...")
-        cenario_B.cenario_b_gguf(llm, modelo_id, metricas)
-        if modelo_eliminado(lista_modelos[x]['Modelo'], formato="gguf"):
-            print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
-            continue
-        print("Iniciando cenario C: Pressão de JSON em Português ...")
-        cenario_C.cenario_c_gguf(llm, modelo_id)
-        if modelo_eliminado(lista_modelos[x]['Modelo'], formato="gguf"):
-            print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
-            continue
-        print("Iniciando cenario D: Sem Contexto BNCC ...")
+        #print("Iniciando cenario A: Stard Cold ...")
+        #cenario_A.cenario_a_gguf(llm, modelo_id, metricas)
+        #if modelo_eliminado(lista_modelos[x]['Modelo'], formato="gguf"):
+            #print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
+            #continue
+        #print("Iniciando cenario B: Geração em Série ...")
+        #cenario_B.cenario_b_gguf(llm, modelo_id, metricas)
+        #if modelo_eliminado(lista_modelos[x]['Modelo'], formato="gguf"):
+            #print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
+            #continue
+        #print("Iniciando cenario C: Pressão de JSON em Português ...")
+        #cenario_C.cenario_c_gguf(llm, modelo_id)
+        #if modelo_eliminado(lista_modelos[x]['Modelo'], formato="gguf"):
+            #print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
+            #continue
+        #print("Iniciando cenario D: Sem Contexto BNCC ...")
         cenario_D.cenario_d_gguf(llm, modelo_id)
         print("testes finalizado")
 

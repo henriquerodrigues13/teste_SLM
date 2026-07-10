@@ -1,0 +1,17 @@
+{
+    "modelo": "bartowski/Qwen2.5-Math-1.5B-Instruct-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "Português incompreensível",
+    "cenario_a": {
+        "cold_start_segundos": 52.74,
+        "ram_idle_mb": 418.3,
+        "ram_usada_mb": 867.3,
+        "tokens_por_segundo": 9.81
+    },
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": "Português incompreensível"
+    },
+    "descrição": "O modelo não conseguiu responde em portugues"
+}

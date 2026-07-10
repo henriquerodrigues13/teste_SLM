@@ -1,0 +1,83 @@
+{
+    "modelo": "Qwen/Qwen2.5-3B-Instruct-GGUF",
+    "formato": "gguf",
+    "eliminado": false,
+    "motivo_eliminacao": null,
+    "cenario_a": {
+        "cold_start_segundos": 135.76,
+        "ram_idle_mb": 321.0,
+        "ram_usada_mb": 1627.4,
+        "tokens_por_segundo": 1.59
+    },
+    "eliminacao_manual": {
+        "eliminado": false,
+        "eliminado_por": null
+    },
+    "descrição": "uam reposta muito boa do modelo, talvez como ponto fraco sendo a questão do tempo de execução",
+    "cenario_b": {
+        "rodadas": 10,
+        "json_validos": 8,
+        "json_invalidos": 2,
+        "taxa_json_valido_percent": 0.8,
+        "crashes_oom": 0,
+        "tps_medio": 4.94,
+        "ram_media_mb": 209.4,
+        "tempo_medio_por_rodada_segundos": 94.41,
+        "aprovado_crashes": true,
+        "aprovado_ram": true,
+        "aprovado_tempo": false
+    },
+    "cenario_c": {
+        "execucoes": 1,
+        "quantidade_de_questoes": 5,
+        "tentativas": 0,
+        "valido_primeira_tentativa": true,
+        "precisou_retry": false,
+        "falhou_com_3_tentativas": false,
+        "aprovado": true
+    },
+    "cenario_d": {
+        "habilidades_testadas": [
+            "EF08MA05",
+            "EF06MA17"
+        ],
+        "outputs": {
+            "EF08MA05": {
+                "questoes": [
+                    {
+                        "enunciado": "Quando um retângulo quadrado tem uma diagonal medindo 20 cm, qual é a medida da hipotenusa do triângulo retângulo formada pelo diagonal e um dos lados?",
+                        "alternativas": {
+                            "A": "14 cm",
+                            "B": "16 cm",
+                            "C": "18 cm",
+                            "D": "20 cm",
+                            "E": "24 cm"
+                        },
+                        "resposta_correta": "D",
+                        "resolucao_passo_a_passo": "expressao_diagonal_quadrado = 20\n# Hipotenusa do triângulo retângulo formada pela diagonal e um dos lados é igual à diagonal de um quadrado cujos lados são a hipotenusa.\nhipotenusa_triangulo_retangulo = expressao_diagonal_quadrado\nresultado = hipotenusa_triangulo_retangulo"
+                    }
+                ]
+            },
+            "EF06MA17": {
+                "questoes": [
+                    {
+                        "enunciado": "Quadrado ABCD tem lado de comprimento 4 cm. Um triângulo retângulo é inscrito no quadrado, com o vértice do ângulo reto na diagonal AC e os outros dois vértices no lado AB e AD. Qual é a altura deste triângulo em relação à base AB ou AD?",
+                        "alternativas": {
+                            "A": "2 cm",
+                            "B": "3 cm",
+                            "C": "4 cm",
+                            "D": "5 cm",
+                            "E": "6 cm"
+                        },
+                        "resposta_correta": "A",
+                        "resolucao_passo_a_passo": "= 2cm * (AB/AC) = 2cm * (√2 / 2) = 2cm * 0.7071 ≈ 2cm"
+                    }
+                ]
+            }
+        },
+        "json_valido": {
+            "EF08MA05": true,
+            "EF06MA17": true
+        }
+    }
+}

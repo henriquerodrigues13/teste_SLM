@@ -1,7 +1,7 @@
 import datetime
 import json
 from pathlib import Path
-import torch
+#import torch
 from Testando_modelos.instrucao.instrucao_a import instrucao
 
 
@@ -142,8 +142,7 @@ def cenario_a(modelo: str, tokenizer, model, metricas):
 
 def cenario_a_gguf(llm, modelo, metricas):
 
-    mensagens = [
-        {"role": "system", "content": """Você é um especialista sênior em elaboração de itens avaliativos de Matemática para o Ensino Fundamental (1º ao 9º ano), com domínio profundo da Base Nacional Comum Curricular (BNCC).
+    prompt_sistema = """Você é um especialista sênior em elaboração de itens avaliativos de Matemática para o Ensino Fundamental (1º ao 9º ano), com domínio profundo da Base Nacional Comum Curricular (BNCC).
 
         Suas responsabilidades:
         - Criar questões de múltipla escolha (5 alternativas: A, B, C, D, E) rigorosamente alinhadas à habilidade da BNCC solicitada.
@@ -157,7 +156,7 @@ def cenario_a_gguf(llm, modelo, metricas):
         - Retorne SOMENTE o JSON estruturado solicitado, sem texto adicional, markdown ou explicações fora do JSON.
         - Todas as questões devem ser inéditas entre si na mesma resposta.
         - A resposta correta deve ser distribuída de forma variada entre A, B, C, D e E ao longo das questões.
-        
+
         Retorne SOMENTE um JSON com esta estrutura exata:
         {
             "questoes": [
@@ -175,9 +174,10 @@ def cenario_a_gguf(llm, modelo, metricas):
                 }
             ]
         }
-        
-        O campo "resolucao_passo_a_passo" é OBRIGATÓRIO. Liste apenas os passos de cálculo numerados, no formato "expressão = resultado". Sem texto introdutório, sem explicações teóricas, sem conclusão."""},
-        {"role": "user", "content": f"""
+
+        O campo "resolucao_passo_a_passo" é OBRIGATÓRIO. Escreva a resolução como texto corrido, sem lista numerada, sem tópicos, sem marcadores. Apresente os passos de cálculo em sequência natural, no formato "expressão = resultado", conectados em frases contínuas. Sem texto introdutório, sem explicações teóricas, sem conclusão."""
+
+    prompt = f"""
         Gere exatamente {instrucao["quantity"]} questão(ões) de múltipla escolha para a seguinte habilidade da BNCC:
 
         **Habilidade:** {instrucao["habilidadeContext"]["habilidadeId"]}
@@ -190,8 +190,19 @@ def cenario_a_gguf(llm, modelo, metricas):
         {"Exemplo 1: " + instrucao["habilidadeContext"]["examples"][0]["enunciado"]}
 
         Gere {instrucao["quantity"]} questão(ões) novas, inéditas e alinhadas à habilidade {instrucao["habilidadeContext"]["habilidadeId"]}.
-        """}
-    ]
+        """
+
+    modelos_sem_system = ["gemma-2-2b-it"]
+
+    if any(nome in modelo for nome in modelos_sem_system):
+        mensagens = [
+            {"role": "user", "content": f"{prompt_sistema}\n\n{prompt}"}
+        ]
+    else:
+        mensagens = [
+            {"role": "system", "content": prompt_sistema},
+            {"role": "user", "content": prompt},
+        ]
 
     metricas.iniciar(0)
 
@@ -227,7 +238,7 @@ def cenario_a_gguf(llm, modelo, metricas):
         }
     }
 
-    pasta_resultados = Path(__file__).parent.parent / "resultados"
+    pasta_resultados = Path(__file__).parent.parent / "resultados_gguf"
     pasta_resultados.mkdir(exist_ok=True)
     nome_arquivo = modelo.replace("/", "--") + "-gguf"
     arquivo = pasta_resultados / f"{nome_arquivo}.json"

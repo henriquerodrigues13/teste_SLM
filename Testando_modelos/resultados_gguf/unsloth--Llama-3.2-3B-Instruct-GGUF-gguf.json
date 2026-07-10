@@ -1,0 +1,78 @@
+{
+    "modelo": "unsloth/Llama-3.2-3B-Instruct-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "Português incompreensível",
+    "cenario_a": {
+        "cold_start_segundos": 77.33,
+        "ram_idle_mb": 596.1,
+        "ram_usada_mb": 1755.6,
+        "tokens_por_segundo": 4.48
+    },
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": "Português incompreensível"
+    },
+    "descrição": "Além do json fora do padrão determinado, o modelo errou a solução da questão",
+    "cenario_b": {
+        "rodadas": 10,
+        "json_validos": 0,
+        "json_invalidos": 10,
+        "taxa_json_valido_percent": 0.0,
+        "crashes_oom": 0,
+        "tps_medio": 5.64,
+        "ram_media_mb": 52.1,
+        "tempo_medio_por_rodada_segundos": 79.28,
+        "aprovado_crashes": true,
+        "aprovado_ram": true,
+        "aprovado_tempo": true
+    },
+    "cenario_c": {
+        "execucoes": 3,
+        "quantidade_de_questoes": 5,
+        "tentativas": 3,
+        "valido_primeira_tentativa": false,
+        "precisou_retry": false,
+        "falhou_com_3_tentativas": true,
+        "aprovado": false
+    },
+    "cenario_d": {
+        "habilidades_testadas": [
+            "EF08MA05",
+            "EF06MA17"
+        ],
+        "outputs": {
+            "EF08MA05": { "resolucao_passo_a_passo": [
+                                "1. A medida do ângulo BCD é igual à medida do ângulo ACB (ou ângulo ADB) menos a medida do ângulo ABD.",
+                                "2. Como o ângulo A é 60 graus e o ângulo D é 120 graos, podemos encontrar a medida do ângulo ABD como: 180 - 120 = 60 graus",
+                                "3. Portanto, a medida do ângulo BCD é igual à medida do ângulo ABC (ou ângulo ADB) menos a medida do ângulo ABD: 90 - 60 = 30 graus"
+                            ]
+                "erro": "Schema inválido",
+                "output_bruto": {
+                    "questoes": [
+                        {
+                            "enunciado": "Em um quadrilátero ABCD, o ângulo A é 60 graus e o ângulo D é 120 graos. Qual é a medida do ângulo BCD?",
+                            "alternativas": {
+                                "A": "40 graus",
+                                "B": "70 graus",
+                                "C": "90 graus",
+                                "D": "100 graus",
+                                "E": "110 graus"
+                            },
+                            "resposta_correta": "B",
+
+                        }
+                    ]
+                }
+            },
+            "EF06MA17": {
+                "erro": "Schema inválido",
+                "output_bruto": "```\n{\n  \"questoes\": [\n    {\n      \"enunciado\": \"Em um retângulo ABCD, se AB = 6 cm e BC = 8 cm, qual é a medida do ângulo B?\",\n      \"alternativas\": {\n        \"A\": \"20°\",\n        \"B\": \"40°\",\n        \"C\": \"45°\",\n        \"D\": \"60°\",\n        \"E\": \"90°\"\n      },\n      \"resposta_correta\": \"C\",\n      \"resolucao_passo_a_passo\": [\n        \"1. Calcule o comprimento da hipotenusa do triângulo ABC (AB^2 + BC^2) = 6^2 + 8^2 = 36 + 64 = 100\",\n        \"2. Encontre a medida do ângulo B usando as funções trigonométricas: sen(B) = oposto / hipotenusa = 8/10 = 0,8 \\n sen(40°) ≈ 0,6428\\n\",\n        \"3. Conclua que o ângulo B não é de 40° pois a função seno atinge seu valor máximo em 90° e não em 40°\\n\",\n        \"4. Conclua que o ângulo B deve ser 45° porque sen(45°) = √2/2 e \\n0,8 ≈ (√2/2)\\n\"\n      ]\n    }\n  ]\n}\n```"
+            }
+        },
+        "json_valido": {
+            "EF08MA05": false,
+            "EF06MA17": false
+        }
+    }
+}

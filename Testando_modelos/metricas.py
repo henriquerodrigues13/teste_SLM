@@ -1,7 +1,7 @@
 import time
 import os
 import psutil
-import torch
+#import torch
 import threading
 
 class MetricasInferencia:
