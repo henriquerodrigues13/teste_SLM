@@ -47,6 +47,7 @@ class MetricasInferencia:
         self.tempo_inicio = time.perf_counter()
         self.ram_inicio_mb = self.processo.memory_info().rss / (1024 ** 2)
         self.ram_pico_mb = self.ram_inicio_mb
+        self._monitorando = True
         self._thread = threading.Thread(target=self._monitorar_ram, daemon=True)
         self._thread.start()
 
@@ -55,7 +56,9 @@ class MetricasInferencia:
         self.tokens_saida = tokens_saida
         self._monitorando = False
         self._thread.join()
-        self.ram_por_rodada.append(self.ram_usada_mb)
+        # Guarda o pico ABSOLUTO de RAM da rodada (inclui os pesos do modelo já
+        # carregados), não o delta — o orçamento de < 2 GB é sobre o RSS total.
+        self.ram_por_rodada.append(self.ram_pico_mb)
         self.TPS_por_rodada.append(tokens_saida / self.tempo_resposta_modelo)
         self.tempo_total_por_rodada.append(self.tempo_fim - self.tempo_inicio)
 
@@ -89,11 +92,13 @@ class MetricasInferencia:
     def media_rodadas(self):
         tps_medio = sum(self.TPS_por_rodada) / len(self.TPS_por_rodada)
         ram_media = sum(self.ram_por_rodada) / len(self.ram_por_rodada)
+        ram_pico = max(self.ram_por_rodada) if self.ram_por_rodada else 0
         tempo_medio = sum(self.tempo_total_por_rodada) / len(self.tempo_total_por_rodada)
 
         return {
             "tps_medio": tps_medio,
             "ram_media_mb": ram_media,
+            "ram_pico_mb": ram_pico,
             "tempo_medio_segundos": tempo_medio
         }
 
@@ -108,7 +113,7 @@ class MetricasInferencia:
             Tokens gerados                          : {self.tokens_saida}
             Tokens/segundo                          : {self.tokens_por_segundo:.2f}
             RAM início                              : {self.ram_inicio_mb:.1f} MB
-            RAM pico                                : {self.ram_pico_mb:.1f} MB0
+            RAM pico                                : {self.ram_pico_mb:.1f} MB
             RAM usada (delta)                       : {self.ram_usada_mb:.1f} MB
             """
         )

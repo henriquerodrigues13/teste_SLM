@@ -3,7 +3,21 @@ import re
 from Testando_modelos.schema_json import GeneratedQuestionsResponse
 
 
+def remover_think(texto: str) -> str:
+    """Remove blocos de raciocínio <think>...</think> antes de procurar o JSON.
+
+    Modelos de raciocínio (Qwen3, DeepSeek-R1, Phi-4-reasoning) emitem o
+    pensamento em <think>...</think> antes da resposta. Removemos o bloco
+    fechado; se ficou um <think> sem fechamento (resposta truncada), cortamos
+    dali em diante — nesse caso não há JSON mesmo.
+    """
+    sem = re.sub(r"<think>.*?</think>", "", texto, flags=re.DOTALL | re.IGNORECASE)
+    sem = re.sub(r"<think>.*$", "", sem, flags=re.DOTALL | re.IGNORECASE)
+    return sem.strip()
+
+
 def extrair_e_validar(texto: str) -> tuple[bool, GeneratedQuestionsResponse | None, str | None]:
+    texto = remover_think(texto)
     candidatos = []
 
     matches_markdown = re.findall(r"```json\s*(.*?)\s*```", texto, re.DOTALL)
@@ -35,6 +49,7 @@ def extrair_e_validar(texto: str) -> tuple[bool, GeneratedQuestionsResponse | No
 
 
 def parsear_json_bruto(texto: str) -> dict | str:
+    texto = remover_think(texto)
     match = re.search(r"```json\s*(.*?)\s*```", texto, re.DOTALL)
     json_str = match.group(1).strip() if match else texto.strip()
 

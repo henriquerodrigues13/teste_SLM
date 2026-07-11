@@ -1,8 +1,9 @@
 import os
-#from transformers import AutoTokenizer, AutoModelForCausalLM
 import json
 
 def baixando_modelo(modelo: str):
+    from transformers import AutoTokenizer, AutoModelForCausalLM
+
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
     try:
