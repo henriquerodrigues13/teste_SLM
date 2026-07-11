@@ -12,3 +12,9 @@ dependencies = [
     "pydantic",
     "psutil"
 ]
+
+[project.optional-dependencies]
+safetensors = [
+    "torch",
+    "transformers"
+]

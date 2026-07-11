@@ -1,48 +1,17 @@
 import json
 from pathlib import Path
-#import torch
 from Testando_modelos.valida_json import extrair_e_validar, parsear_json_bruto
+from Testando_modelos.instrucao.prompts import (
+    construir_prompt_sistema,
+    RESOLUCAO_NUMERADA,
+    RESOLUCAO_OBJETIVA,
+)
 
 
 def cenario_d(modelo: str, tokenizer, model):
-    prompt_sistema = (
-        """
-        Você é um especialista sênior em elaboração de itens avaliativos de Matemática para o Ensino Fundamental (1º ao 9º ano), com domínio profundo da Base Nacional Comum Curricular (BNCC).
+    import torch
 
-        Suas responsabilidades:
-        - Criar questões de múltipla escolha (5 alternativas: A, B, C, D, E) rigorosamente alinhadas à habilidade da BNCC solicitada.
-        - Garantir que o enunciado seja claro, contextualizado e adequado à faixa etária do estudante.
-        - Produzir alternativas plausíveis e com distratores pedagogicamente fundamentados (erros comuns dos alunos, não respostas absurdas).
-        - Redigir a resolução passo a passo de forma didática, como faria um professor explicando para o aluno.
-        - Calibrar a dificuldade respeitando os pré-requisitos informados: os conceitos listados em pré-requisitos devem ser dominados pelo aluno, e NÃO devem ser o foco central da questão — use-os como base para atingir a habilidade-alvo.
-        - Manter consistência de estilo, formato e nível de abstração com os exemplos fornecidos (few-shot).
-
-        Regras absolutas:
-        - Retorne SOMENTE o JSON estruturado solicitado, sem texto adicional, markdown ou explicações fora do JSON.
-        - Todas as questões devem ser inéditas entre si na mesma resposta.
-        - A resposta correta deve ser distribuída de forma variada entre A, B, C, D e E ao longo das questões.
-
-        Retorne SOMENTE um JSON com esta estrutura exata:
-        {
-            "questoes": [
-                {
-                    "enunciado": "...",
-                    "alternativas": {
-                        "A": "...",
-                        "B": "...",
-                        "C": "...",
-                        "D": "...",
-                        "E": "..."
-                    },
-                    "resposta_correta": "A",
-                    "resolucao_passo_a_passo": "..."
-                }
-            ]
-        }
-
-         O campo "resolucao_passo_a_passo" é OBRIGATÓRIO. Mostre apenas os passos de cálculo para chegar na resposta correta, de forma objetiva.
-        """
-    )
+    prompt_sistema = construir_prompt_sistema(RESOLUCAO_OBJETIVA)
 
     prompt = (
         f"""
@@ -121,44 +90,7 @@ def cenario_d(modelo: str, tokenizer, model):
         }
     }
 
-    prompt_sistema = (
-        """
-        Você é um especialista sênior em elaboração de itens avaliativos de Matemática para o Ensino Fundamental (1º ao 9º ano), com domínio profundo da Base Nacional Comum Curricular (BNCC).
-
-        Suas responsabilidades:
-        - Criar questões de múltipla escolha (5 alternativas: A, B, C, D, E) rigorosamente alinhadas à habilidade da BNCC solicitada.
-        - Garantir que o enunciado seja claro, contextualizado e adequado à faixa etária do estudante.
-        - Produzir alternativas plausíveis e com distratores pedagogicamente fundamentados (erros comuns dos alunos, não respostas absurdas).
-        - Redigir a resolução passo a passo de forma didática, como faria um professor explicando para o aluno.
-        - Calibrar a dificuldade respeitando os pré-requisitos informados: os conceitos listados em pré-requisitos devem ser dominados pelo aluno, e NÃO devem ser o foco central da questão — use-os como base para atingir a habilidade-alvo.
-        - Manter consistência de estilo, formato e nível de abstração com os exemplos fornecidos (few-shot).
-
-        Regras absolutas:
-        - Retorne SOMENTE o JSON estruturado solicitado, sem texto adicional, markdown ou explicações fora do JSON.
-        - Todas as questões devem ser inéditas entre si na mesma resposta.
-        - A resposta correta deve ser distribuída de forma variada entre A, B, C, D e E ao longo das questões.
-
-        Retorne SOMENTE um JSON com esta estrutura exata:
-        {
-            "questoes": [
-                {
-                    "enunciado": "...",
-                    "alternativas": {
-                        "A": "...",
-                        "B": "...",
-                        "C": "...",
-                        "D": "...",
-                        "E": "..."
-                    },
-                    "resposta_correta": "A",
-                    "resolucao_passo_a_passo": "..."
-                }
-            ]
-        }
-
-         O campo "resolucao_passo_a_passo" é OBRIGATÓRIO. Mostre apenas os passos de cálculo para chegar na resposta correta, de forma objetiva.
-        """
-    )
+    prompt_sistema = construir_prompt_sistema(RESOLUCAO_OBJETIVA)
 
     prompt = (
         f"""
@@ -225,6 +157,7 @@ def cenario_d(modelo: str, tokenizer, model):
         }
 
     resultados["cenario_d"]["outputs"]["EF06MA17"] = output_final
+    resultados["cenario_d"]["json_valido"]["EF06MA17"] = valido
 
     pasta_resultados = Path(__file__).parent.parent / "resultados"
     nome_arquivo = modelo.replace("/", "--")
@@ -241,40 +174,7 @@ def cenario_d(modelo: str, tokenizer, model):
 
 def cenario_d_gguf(llm, modelo):
     mensagens = [
-        {"role": "system", "content": """Você é um especialista sênior em elaboração de itens avaliativos de Matemática para o Ensino Fundamental (1º ao 9º ano), com domínio profundo da Base Nacional Comum Curricular (BNCC).
-
-        Suas responsabilidades:
-        - Criar questões de múltipla escolha (5 alternativas: A, B, C, D, E) rigorosamente alinhadas à habilidade da BNCC solicitada.
-        - Garantir que o enunciado seja claro, contextualizado e adequado à faixa etária do estudante.
-        - Produzir alternativas plausíveis e com distratores pedagogicamente fundamentados (erros comuns dos alunos, não respostas absurdas).
-        - Redigir a resolução passo a passo de forma didática, como faria um professor explicando para o aluno.
-        - Calibrar a dificuldade respeitando os pré-requisitos informados: os conceitos listados em pré-requisitos devem ser dominados pelo aluno, e NÃO devem ser o foco central da questão — use-os como base para atingir a habilidade-alvo.
-        - Manter consistência de estilo, formato e nível de abstração com os exemplos fornecidos (few-shot).
-
-        Regras absolutas:
-        - Retorne SOMENTE o JSON estruturado solicitado, sem texto adicional, markdown ou explicações fora do JSON.
-        - Todas as questões devem ser inéditas entre si na mesma resposta.
-        - A resposta correta deve ser distribuída de forma variada entre A, B, C, D e E ao longo das questões.
-
-        Retorne SOMENTE um JSON com esta estrutura exata:
-        {
-            "questoes": [
-                {
-                    "enunciado": "...",
-                    "alternativas": {
-                        "A": "...",
-                        "B": "...",
-                        "C": "...",
-                        "D": "...",
-                        "E": "..."
-                    },
-                    "resposta_correta": "A",
-                    "resolucao_passo_a_passo": "..."
-                }
-            ]
-        }
-
-        O campo "resolucao_passo_a_passo" é OBRIGATÓRIO. Liste apenas os passos de cálculo numerados, no formato "expressão = resultado". Sem texto introdutório, sem explicações teóricas, sem conclusão."""},
+        {"role": "system", "content": construir_prompt_sistema(RESOLUCAO_NUMERADA)},
         {"role": "user", "content": f"""
             Gere exatamente 1 questão(ões) de múltipla escolha para a seguinte habilidade da BNCC:
 
@@ -330,44 +230,11 @@ def cenario_d_gguf(llm, modelo):
     }
 
     mensagens = [
-        {"role": "system", "content": """Você é um especialista sênior em elaboração de itens avaliativos de Matemática para o Ensino Fundamental (1º ao 9º ano), com domínio profundo da Base Nacional Comum Curricular (BNCC).
-
-        Suas responsabilidades:
-        - Criar questões de múltipla escolha (5 alternativas: A, B, C, D, E) rigorosamente alinhadas à habilidade da BNCC solicitada.
-        - Garantir que o enunciado seja claro, contextualizado e adequado à faixa etária do estudante.
-        - Produzir alternativas plausíveis e com distratores pedagogicamente fundamentados (erros comuns dos alunos, não respostas absurdas).
-        - Redigir a resolução passo a passo de forma didática, como faria um professor explicando para o aluno.
-        - Calibrar a dificuldade respeitando os pré-requisitos informados: os conceitos listados em pré-requisitos devem ser dominados pelo aluno, e NÃO devem ser o foco central da questão — use-os como base para atingir a habilidade-alvo.
-        - Manter consistência de estilo, formato e nível de abstração com os exemplos fornecidos (few-shot).
-
-        Regras absolutas:
-        - Retorne SOMENTE o JSON estruturado solicitado, sem texto adicional, markdown ou explicações fora do JSON.
-        - Todas as questões devem ser inéditas entre si na mesma resposta.
-        - A resposta correta deve ser distribuída de forma variada entre A, B, C, D e E ao longo das questões.
-
-        Retorne SOMENTE um JSON com esta estrutura exata:
-        {
-            "questoes": [
-                {
-                    "enunciado": "...",
-                    "alternativas": {
-                        "A": "...",
-                        "B": "...",
-                        "C": "...",
-                        "D": "...",
-                        "E": "..."
-                    },
-                    "resposta_correta": "A",
-                    "resolucao_passo_a_passo": "..."
-                }
-            ]
-        }
-
-                                O campo "resolucao_passo_a_passo" é OBRIGATÓRIO. Liste apenas os passos de cálculo numerados, no formato "expressão = resultado". Sem texto introdutório, sem explicações teóricas, sem conclusão."""},
+        {"role": "system", "content": construir_prompt_sistema(RESOLUCAO_NUMERADA)},
         {"role": "user", "content": f"""
         Gere exatamente 1 questão(ões) de múltipla escolha para a seguinte habilidade da BNCC:
 
-        **Habilidade:** EF08MA05
+        **Habilidade:** EF06MA17
         **Unidade Temática:** Geometria
 
         **Pré-requisitos que o aluno já deve dominar (calibração de dificuldade):**
@@ -376,7 +243,7 @@ def cenario_d_gguf(llm, modelo):
         **Exemplos de questões existentes para esta habilidade (mantenha consistência de estilo):**
         Nenhum exemplo disponível — crie questões seguindo as diretrizes gerais da BNCC.
 
-        Gere 1 questão(ões) novas, inéditas e alinhadas à habilidade EF08MA05
+        Gere 1 questão(ões) novas, inéditas e alinhadas à habilidade EF06MA17
         """}
     ]
 
@@ -394,8 +261,6 @@ def cenario_d_gguf(llm, modelo):
     print("-" * 50)
     print(output_text)
     print("-" * 50)
-
-    resultados["cenario_d"]["outputs"]["EF06MA17"] = output_final
 
     valido, resultado, erro = extrair_e_validar(output_text)
 
