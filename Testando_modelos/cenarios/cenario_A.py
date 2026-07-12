@@ -1,50 +1,19 @@
 import datetime
 import json
 from pathlib import Path
-#import torch
 from Testando_modelos.instrucao.instrucao_a import instrucao
+from Testando_modelos.instrucao.prompts import (
+    construir_prompt_sistema,
+    RESOLUCAO_NUMERADA,
+    RESOLUCAO_CORRIDA,
+)
 
 
 def cenario_a(modelo: str, tokenizer, model, metricas):
+    import torch
 
-    prompt_sistema = (
-        """
-        Você é um especialista sênior em elaboração de itens avaliativos de Matemática para o Ensino Fundamental (1º ao 9º ano), com domínio profundo da Base Nacional Comum Curricular (BNCC).
 
-        Suas responsabilidades:
-        - Criar questões de múltipla escolha (5 alternativas: A, B, C, D, E) rigorosamente alinhadas à habilidade da BNCC solicitada.
-        - Garantir que o enunciado seja claro, contextualizado e adequado à faixa etária do estudante.
-        - Produzir alternativas plausíveis e com distratores pedagogicamente fundamentados (erros comuns dos alunos, não respostas absurdas).
-        - Redigir a resolução passo a passo de forma didática, como faria um professor explicando para o aluno.
-        - Calibrar a dificuldade respeitando os pré-requisitos informados: os conceitos listados em pré-requisitos devem ser dominados pelo aluno, e NÃO devem ser o foco central da questão — use-os como base para atingir a habilidade-alvo.
-        - Manter consistência de estilo, formato e nível de abstração com os exemplos fornecidos (few-shot).
-
-        Regras absolutas:
-        - Retorne SOMENTE o JSON estruturado solicitado, sem texto adicional, markdown ou explicações fora do JSON.
-        - Todas as questões devem ser inéditas entre si na mesma resposta.
-        - A resposta correta deve ser distribuída de forma variada entre A, B, C, D e E ao longo das questões.
-        
-        Retorne SOMENTE um JSON com esta estrutura exata:
-        {
-            "questoes": [
-                {
-                    "enunciado": "...",
-                    "alternativas": {
-                        "A": "...",
-                        "B": "...",
-                        "C": "...",
-                        "D": "...",
-                        "E": "..."
-                    },
-                    "resposta_correta": "A",
-                    "resolucao_passo_a_passo": "..."
-                }
-            ]
-        }
-        
-        O campo "resolucao_passo_a_passo" é OBRIGATÓRIO. Liste apenas os passos de cálculo numerados, no formato "expressão = resultado". Sem texto introdutório, sem explicações teóricas, sem conclusão.
-        """
-    )
+    prompt_sistema = construir_prompt_sistema(RESOLUCAO_NUMERADA)
 
     prompt = (
         f"""
@@ -106,7 +75,7 @@ def cenario_a(modelo: str, tokenizer, model, metricas):
         reposta = True
         motivo = f"RAM usada pelo modelo {metricas.ram_usada_mb:.1f} MB — limite era 2048 MB"
     else:
-        print("valiação manual")
+        print("avaliação manual")
         reposta = input(f"O modelo {modelo} está eliminado? [S ou N]")
         if reposta.upper() == "S":
                 motivo = "Português incompreensível"
@@ -142,40 +111,7 @@ def cenario_a(modelo: str, tokenizer, model, metricas):
 
 def cenario_a_gguf(llm, modelo, metricas):
 
-    prompt_sistema = """Você é um especialista sênior em elaboração de itens avaliativos de Matemática para o Ensino Fundamental (1º ao 9º ano), com domínio profundo da Base Nacional Comum Curricular (BNCC).
-
-        Suas responsabilidades:
-        - Criar questões de múltipla escolha (5 alternativas: A, B, C, D, E) rigorosamente alinhadas à habilidade da BNCC solicitada.
-        - Garantir que o enunciado seja claro, contextualizado e adequado à faixa etária do estudante.
-        - Produzir alternativas plausíveis e com distratores pedagogicamente fundamentados (erros comuns dos alunos, não respostas absurdas).
-        - Redigir a resolução passo a passo de forma didática, como faria um professor explicando para o aluno.
-        - Calibrar a dificuldade respeitando os pré-requisitos informados: os conceitos listados em pré-requisitos devem ser dominados pelo aluno, e NÃO devem ser o foco central da questão — use-os como base para atingir a habilidade-alvo.
-        - Manter consistência de estilo, formato e nível de abstração com os exemplos fornecidos (few-shot).
-
-        Regras absolutas:
-        - Retorne SOMENTE o JSON estruturado solicitado, sem texto adicional, markdown ou explicações fora do JSON.
-        - Todas as questões devem ser inéditas entre si na mesma resposta.
-        - A resposta correta deve ser distribuída de forma variada entre A, B, C, D e E ao longo das questões.
-
-        Retorne SOMENTE um JSON com esta estrutura exata:
-        {
-            "questoes": [
-                {
-                    "enunciado": "...",
-                    "alternativas": {
-                        "A": "...",
-                        "B": "...",
-                        "C": "...",
-                        "D": "...",
-                        "E": "..."
-                    },
-                    "resposta_correta": "A",
-                    "resolucao_passo_a_passo": "..."
-                }
-            ]
-        }
-
-        O campo "resolucao_passo_a_passo" é OBRIGATÓRIO. Escreva a resolução como texto corrido, sem lista numerada, sem tópicos, sem marcadores. Apresente os passos de cálculo em sequência natural, no formato "expressão = resultado", conectados em frases contínuas. Sem texto introdutório, sem explicações teóricas, sem conclusão."""
+    prompt_sistema = construir_prompt_sistema(RESOLUCAO_CORRIDA)
 
     prompt = f"""
         Gere exatamente {instrucao["quantity"]} questão(ões) de múltipla escolha para a seguinte habilidade da BNCC:
@@ -231,7 +167,7 @@ def cenario_a_gguf(llm, modelo, metricas):
 
     resultados = {
         "cenario_a": {
-            "cold_start_segundos": round(metricas.tempo_carregamento_modelo + metricas.tempo_total, 2),
+            "cold_start_segundos": round(metricas.tempo_total, 2),
             "ram_idle_mb": round(metricas.ram_inicio_mb, 1),
             "ram_usada_mb": round(metricas.ram_usada_mb, 1),
             "tokens_por_segundo": round(metricas.tokens_por_segundo, 2),

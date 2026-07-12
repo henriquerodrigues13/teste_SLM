@@ -1,11 +1,17 @@
 import json
 from pathlib import Path
-#import torch
 from Testando_modelos.valida_json import extrair_e_validar, validar_quantidade
 from Testando_modelos.instrucao.instrucao_b import seletor_de_questao
+from Testando_modelos.instrucao.prompts import (
+    construir_prompt_sistema,
+    RESOLUCAO_NUMERADA,
+    RESOLUCAO_OBJETIVA,
+)
 
 
 def cenario_b(modelo: str, tokenizer, model, metricas):
+    import torch
+
     crashes_oom = 0
     json_validos = 0
     json_invalidos = 0
@@ -15,44 +21,7 @@ def cenario_b(modelo: str, tokenizer, model, metricas):
 
         instrucao = seletor_de_questao()
 
-        prompt_sistema = (
-            """
-            Você é um especialista sênior em elaboração de itens avaliativos de Matemática para o Ensino Fundamental (1º ao 9º ano), com domínio profundo da Base Nacional Comum Curricular (BNCC).
-
-            Suas responsabilidades:
-            - Criar questões de múltipla escolha (5 alternativas: A, B, C, D, E) rigorosamente alinhadas à habilidade da BNCC solicitada.
-            - Garantir que o enunciado seja claro, contextualizado e adequado à faixa etária do estudante.
-            - Produzir alternativas plausíveis e com distratores pedagogicamente fundamentados (erros comuns dos alunos, não respostas absurdas).
-            - Redigir a resolução passo a passo de forma didática, como faria um professor explicando para o aluno.
-            - Calibrar a dificuldade respeitando os pré-requisitos informados: os conceitos listados em pré-requisitos devem ser dominados pelo aluno, e NÃO devem ser o foco central da questão — use-os como base para atingir a habilidade-alvo.
-            - Manter consistência de estilo, formato e nível de abstração com os exemplos fornecidos (few-shot).
-
-            Regras absolutas:
-            - Retorne SOMENTE o JSON estruturado solicitado, sem texto adicional, markdown ou explicações fora do JSON.
-            - Todas as questões devem ser inéditas entre si na mesma resposta.
-            - A resposta correta deve ser distribuída de forma variada entre A, B, C, D e E ao longo das questões.
-
-            Retorne SOMENTE um JSON com esta estrutura exata:
-            {
-                "questoes": [
-                    {
-                        "enunciado": "...",
-                        "alternativas": {
-                            "A": "...",
-                            "B": "...",
-                            "C": "...",
-                            "D": "...",
-                            "E": "..."
-                        },
-                        "resposta_correta": "A",
-                        "resolucao_passo_a_passo": "..."
-                    }
-                ]
-            }
-
-             O campo "resolucao_passo_a_passo" é OBRIGATÓRIO. Mostre apenas os passos de cálculo para chegar na resposta correta, de forma objetiva.
-            """
-        )
+        prompt_sistema = construir_prompt_sistema(RESOLUCAO_OBJETIVA)
 
         prompt = (
             f"""
@@ -102,10 +71,13 @@ def cenario_b(modelo: str, tokenizer, model, metricas):
                 )
         except MemoryError:
             crashes_oom += 1
-
+            metricas.finalizar_rodada(0)
+            continue
         except Exception as e:
             crashes_oom += 1
             print(f"Crash na rodada {i}: {e}")
+            metricas.finalizar_rodada(0)
+            continue
 
         tokens_gerados = saida[0][inputs["input_ids"].shape[1]:]
         tokens_gerados_por_rodada += len(tokens_gerados)
@@ -143,7 +115,7 @@ def cenario_b(modelo: str, tokenizer, model, metricas):
             "rodadas": 10,
             "json_validos": json_validos,
             "json_invalidos": json_invalidos,
-            "taxa_json_valido_percent": round(json_validos / 100, 1),
+            "taxa_json_valido_percent": round(json_validos / 10 * 100, 1),
             "crashes_oom": crashes_oom,
             "tps_medio": round(dados["tps_medio"], 2),
             "ram_media_mb": round(dados["ram_media_mb"], 1),
@@ -167,7 +139,7 @@ def cenario_b(modelo: str, tokenizer, model, metricas):
         dados_existentes["eliminado"] = True
         dados_existentes["motivo_eliminacao"] = f"Crash/OOM detectado — {crashes_oom} ocorrência(s)"
 
-    elif max(metricas.TPS_por_rodada) > 2048:
+    elif dados["ram_media_mb"] > 2048:
         dados_existentes["eliminado"] = True
         dados_existentes["motivo_eliminacao"] = f"RAM média {dados['ram_media_mb']:.1f} MB — limite era 2048 MB"
 
@@ -194,40 +166,7 @@ def cenario_b_gguf(llm, modelo, metricas):
         instrucao = seletor_de_questao()
 
         mensagens = [
-            {"role": "system", "content": """Você é um especialista sênior em elaboração de itens avaliativos de Matemática para o Ensino Fundamental (1º ao 9º ano), com domínio profundo da Base Nacional Comum Curricular (BNCC).
-
-                Suas responsabilidades:
-                - Criar questões de múltipla escolha (5 alternativas: A, B, C, D, E) rigorosamente alinhadas à habilidade da BNCC solicitada.
-                - Garantir que o enunciado seja claro, contextualizado e adequado à faixa etária do estudante.
-                - Produzir alternativas plausíveis e com distratores pedagogicamente fundamentados (erros comuns dos alunos, não respostas absurdas).
-                - Redigir a resolução passo a passo de forma didática, como faria um professor explicando para o aluno.
-                - Calibrar a dificuldade respeitando os pré-requisitos informados: os conceitos listados em pré-requisitos devem ser dominados pelo aluno, e NÃO devem ser o foco central da questão — use-os como base para atingir a habilidade-alvo.
-                - Manter consistência de estilo, formato e nível de abstração com os exemplos fornecidos (few-shot).
-
-                Regras absolutas:
-                - Retorne SOMENTE o JSON estruturado solicitado, sem texto adicional, markdown ou explicações fora do JSON.
-                - Todas as questões devem ser inéditas entre si na mesma resposta.
-                - A resposta correta deve ser distribuída de forma variada entre A, B, C, D e E ao longo das questões.
-
-                Retorne SOMENTE um JSON com esta estrutura exata:
-                {
-                    "questoes": [
-                        {
-                            "enunciado": "...",
-                            "alternativas": {
-                                "A": "...",
-                                "B": "...",
-                                "C": "...",
-                                "D": "...",
-                                "E": "..."
-                            },
-                            "resposta_correta": "A",
-                            "resolucao_passo_a_passo": "..."
-                        }
-                    ]
-                }
-
-                O campo "resolucao_passo_a_passo" é OBRIGATÓRIO. Liste apenas os passos de cálculo numerados, no formato "expressão = resultado". Sem texto introdutório, sem explicações teóricas, sem conclusão."""},
+            {"role": "system", "content": construir_prompt_sistema(RESOLUCAO_NUMERADA)},
             {"role": "user", "content": f"""
                 Gere exatamente 3 questão(ões) de múltipla escolha para a seguinte habilidade da BNCC:
 
@@ -256,10 +195,13 @@ def cenario_b_gguf(llm, modelo, metricas):
             )
         except MemoryError:
             crashes_oom += 1
-
+            metricas.finalizar_rodada(0)
+            continue
         except Exception as e:
             crashes_oom += 1
             print(f"Crash na rodada {i}: {e}")
+            metricas.finalizar_rodada(0)
+            continue
 
         tokens_saida = resposta["usage"]["completion_tokens"]
         tokens_gerados_por_rodada += tokens_saida
@@ -304,7 +246,7 @@ def cenario_b_gguf(llm, modelo, metricas):
             "rodadas": 10,
             "json_validos": json_validos,
             "json_invalidos": json_invalidos,
-            "taxa_json_valido_percent": round(json_validos / 10, 1),
+            "taxa_json_valido_percent": round(json_validos / 10 * 100, 1),
             "crashes_oom": crashes_oom,
             "tps_medio": round(dados["tps_medio"], 2),
             "ram_media_mb": round(dados["ram_media_mb"], 1),

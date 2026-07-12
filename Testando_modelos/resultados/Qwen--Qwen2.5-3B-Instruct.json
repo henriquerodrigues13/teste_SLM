@@ -1,0 +1,16 @@
+{
+    "modelo": "Qwen/Qwen2.5-3B-Instruct",
+    "data": "12/07/2026",
+    "eliminado": true,
+    "motivo_eliminacao": "RAM pico do processo 6368.4 MB — limite era 2048 MB",
+    "descrição": "",
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": "RAM pico do processo 6368.4 MB — limite era 2048 MB"
+    },
+    "cenario_a": {
+        "cold_start_segundos": "60.02 segundos",
+        "ram_idle_mb": "527.8 MB",
+        "ram_pico_mb": "6368.4 MB"
+    }
+}

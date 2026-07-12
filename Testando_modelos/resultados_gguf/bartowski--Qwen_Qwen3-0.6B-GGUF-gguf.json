@@ -1,0 +1,18 @@
+{
+    "modelo": "bartowski/Qwen_Qwen3-0.6B-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "Português incompreensível",
+    "cenario_a": {
+        "cold_start_segundos": 2.87,
+        "ram_idle_mb": 1091.5,
+        "ram_pico_mb": 1138.1,
+        "ram_usada_mb": 46.6,
+        "tokens_por_segundo": 43.83
+    },
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": "Português incompreensível"
+    },
+    "descrição": "JSON ok, mas gabarito errado (3+5=8=A, marcou B)"
+}

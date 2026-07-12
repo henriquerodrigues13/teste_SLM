@@ -103,5 +103,20 @@
         "Modelo": "Qwen/Qwen2.5-7B-Instruct-GGUF",
         "Arquivo": "qwen2.5-7b-instruct-q4_k_m.gguf",
         "Quantizacao": "Q4_K_M"
+    },
+    "21": {
+        "Modelo": "bartowski/SmolLM2-135M-Instruct-GGUF",
+        "Arquivo": "SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "22": {
+        "Modelo": "bartowski/Qwen_Qwen3-0.6B-GGUF",
+        "Arquivo": "Qwen_Qwen3-0.6B-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "23": {
+        "Modelo": "bartowski/microsoft_Phi-4-mini-reasoning-GGUF",
+        "Arquivo": "microsoft_Phi-4-mini-reasoning-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
     }
 }
