@@ -1,0 +1,59 @@
+{
+    "modelo": "bartowski/SmolLM2-135M-Instruct-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "Falha de JSON recorrente, 3 tentativas sem JSON válido (limite era 3)",
+    "cenario_d": {
+        "habilidades_testadas": [
+            "EF08MA05",
+            "EF06MA17"
+        ],
+        "outputs": {
+            "EF08MA05": {
+                "erro": "JSON não encontrado na resposta",
+                "output_bruto": "Todos os questões devem ser inéditas entre si na mesma resposta.\n\n**Resolucao-passo-a-passo:**\n\n1. Aresponar à habilidade-alvo: \"A\" para aquisição.\n2. Criar questões de múltipla escolha: \"Efetuando uma versão\" para descarga e informe como o aluno está em um controle de forma adequada, sem texto adicional (apenas os alunos).\n3. Garantir que o enunciado seja claro, contextualizado e adequado à faixa etária do estudante.\n4. Produzir alternativas plausíveis e comdistões pedagogically fundamentais (erros comuns dos alunos).\n5. Redicilindo a diferença entre os questões devem ser inéditos durante o estudado, serem informados para adicionar uma pessoa atenuada ao estudo."
+            },
+            "EF06MA17": {
+                "erro": "JSON não encontrado na resposta",
+                "output_bruto": "\"O questão \"Efeto o abstrato para a seguinte habilidade da BNCC:\n*   **Resolução:** 63.09%\n**Criar questões de múltipla escolha:** 125.74%\n**Garantir que o aluno está domina à experiência da bancos: não respostas absurdas.**\n*   **Exemplos de questões existentes para esta habilidade (mantenha consistência de estilo):** 30.76%\n**Resolução:** 92.14%\n**Criar questões de múltipla escolha:** 158.63%\n*   **Exemplos de questões existentes para esta habilidade (mantenha consistência de estilo):** 79.24%\n**Resolução:** 70.38%\n*   **Não especificada:** 51.64%\n**Exemplos de questões existentes para esta habilidade (mantenha consistência de estilo):** 27.94%\n***\n\"Uma aplicação \"Criar questões de múltipla escolha\" é obviamente útima: 81%. O controle do aluno com seu exemplo foi inicializado, e estamos ocorreu assim.\""
+            }
+        },
+        "json_valido": {
+            "EF08MA05": false,
+            "EF06MA17": false
+        }
+    },
+    "cenario_a": {
+        "cold_start_segundos": 2.47,
+        "ram_idle_mb": 317.1,
+        "ram_usada_mb": 42.0,
+        "tokens_por_segundo": 147.16
+    },
+    "eliminacao_manual": {
+        "eliminado": false,
+        "eliminado_por": null
+    },
+    "descrição": null,
+    "cenario_b": {
+        "rodadas": 10,
+        "json_validos": 0,
+        "json_invalidos": 10,
+        "taxa_json_valido_percent": 0.0,
+        "crashes_oom": 0,
+        "tps_medio": 183.06,
+        "ram_media_mb": 0.8,
+        "tempo_medio_por_rodada_segundos": 3.28,
+        "aprovado_crashes": true,
+        "aprovado_ram": true,
+        "aprovado_tempo": true
+    },
+    "cenario_c": {
+        "execucoes": 3,
+        "quantidade_de_questoes": 5,
+        "tentativas": 3,
+        "valido_primeira_tentativa": false,
+        "precisou_retry": false,
+        "falhou_com_3_tentativas": true,
+        "aprovado": false
+    }
+}

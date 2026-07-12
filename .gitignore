@@ -244,3 +244,6 @@ SECURITY_INCIDENT.md
 
 /Testando_modelos/modelos_local/*
 /Testando_modelos/modelos_local_gguf/*
+
+# Docs
+docs/

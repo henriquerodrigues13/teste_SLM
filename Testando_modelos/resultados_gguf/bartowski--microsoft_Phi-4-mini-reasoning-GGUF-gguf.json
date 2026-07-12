@@ -1,0 +1,18 @@
+{
+    "modelo": "bartowski/microsoft_Phi-4-mini-reasoning-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "RAM pico do processo 5169.7 MB — limite era 2048 MB",
+    "cenario_a": {
+        "cold_start_segundos": 53.86,
+        "ram_idle_mb": 5061.2,
+        "ram_pico_mb": 5169.7,
+        "ram_usada_mb": 108.5,
+        "tokens_por_segundo": 19.01
+    },
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": null
+    },
+    "descrição": null
+}
