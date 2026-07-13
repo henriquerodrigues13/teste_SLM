@@ -1,12 +1,14 @@
 import json
 import os
 from pathlib import Path
-from time import sleep
 from llama_cpp import Llama
-#from transformers import AutoTokenizer, AutoModelForCausalLM
 from Testando_modelos import download_modelos, download_modelos_gguf
 from Testando_modelos.cenarios import cenario_A, cenario_B, cenario_C, cenario_D
 from Testando_modelos.metricas import MetricasInferencia
+
+
+def limpar_tela():
+    os.system("cls" if os.name == "nt" else "clear")
 
 
 def modelo_eliminado(modelo: str, formato: str = "safetensors") -> bool:
@@ -14,8 +16,11 @@ def modelo_eliminado(modelo: str, formato: str = "safetensors") -> bool:
 
     if formato == "gguf":
         nome_arquivo += "-gguf"
+        pasta = "resultados_gguf"
+    else:
+        pasta = "resultados"
 
-    arquivo = Path(__file__).parent / "resultados_gguf" / f"{nome_arquivo}.json"
+    arquivo = Path(__file__).parent / pasta / f"{nome_arquivo}.json"
 
     if not arquivo.exists():
         return False
@@ -25,112 +30,152 @@ def modelo_eliminado(modelo: str, formato: str = "safetensors") -> bool:
 
     return dados.get("eliminado", False) or dados.get("eliminacao_manual", {}).get("eliminado", False)
 
-os.system("cls")
-while True:
-    print("O que vc quer fazer")
-    print("0 - Sair")
-    print("1 - baixar modelo")
-    print("2 - baixar modelo_gguf")
-    print("3 - testa modelo conventional")
-    print("4 - testa modelo_gguf")
-    reposta = str(input("digite sua reposta: "))
-    if reposta == "0":
-        break
-    elif reposta == "1":
-        os.system("cls")
-        download_modelos.main()
-    elif reposta == "2":
-        os.system("cls")
-        download_modelos_gguf.download()
-    elif reposta == "3":
-        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-        caminho_json = os.path.join(BASE_DIR, 'lista_de_modelos.json')
 
-        with open(caminho_json, 'r', encoding='utf-8') as arquivo:
-            lista_modelos = json.load(arquivo)
+def escolher_modelo(lista_modelos: dict, rotulo: str) -> str | None:
+    print(f"{rotulo}:")
+    for id_modelo, modelo in lista_modelos.items():
+        print(f"id {id_modelo} do {rotulo}: {modelo['Modelo']}")
+    escolha = input(f"digite o id do {rotulo}: ").strip()
+    if escolha not in lista_modelos:
+        print(f"id '{escolha}' inválido — nenhum modelo com esse id.")
+        return None
+    return escolha
 
-        os.system("cls")
-        print("modelo:")
-        for id, modelo in lista_modelos.items():
-            print(f"id {id} do modelo: {modelo['Modelo']}")
-        x = input("digite o id do modelo: ")
-        print("Carregando modelo...")
 
-        metricas = MetricasInferencia()
-        BASE_DIR = Path(__file__).parent
-        nome_pasta = f"{lista_modelos[x]["Modelo"]}".replace("/", "--")
-        caminho = BASE_DIR / "modelos_local" / nome_pasta
+def testar_safetensors():
+    from transformers import AutoTokenizer, AutoModelForCausalLM
 
-        metricas.tempo_load_modelo_inicial()
-        tokenizer = AutoTokenizer.from_pretrained(caminho, local_files_only=True)
-        model = AutoModelForCausalLM.from_pretrained(caminho, local_files_only=True)
-        model.eval()
-        metricas.tempo_load_modelo_final()
-        print(f"Pronto! o modelo: {lista_modelos[x]["Modelo"]} foi carregado com sucesso!")
-        cenario_A.cenario_a(lista_modelos[x]['Modelo'], tokenizer, model, metricas)
-        if modelo_eliminado(lista_modelos[x]['Modelo']):
-            print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
-            continue
-        cenario_B.cenario_b(lista_modelos[x]['Modelo'], tokenizer, model, metricas)
-        if modelo_eliminado(lista_modelos[x]['Modelo']):
-            print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
-            continue
-        cenario_C.cenario_c(lista_modelos[x]['Modelo'], tokenizer, model)
-        if modelo_eliminado(lista_modelos[x]['Modelo']):
-            print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
-            continue
-        cenario_D.cenario_d(lista_modelos[x]['Modelo'], tokenizer, model)
-        if modelo_eliminado(lista_modelos[x]['Modelo']):
-            print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
-            continue
-    elif reposta == "4":
-        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-        caminho_json = os.path.join(BASE_DIR, 'lista_de_modelos_gguf.json')
+    base_dir = Path(__file__).parent
+    with open(base_dir / "lista_de_modelos.json", "r", encoding="utf-8") as arquivo:
+        lista_modelos = json.load(arquivo)
 
-        with open(caminho_json, 'r', encoding='utf-8') as arquivo:
-            lista_modelos = json.load(arquivo)
+    limpar_tela()
+    x = escolher_modelo(lista_modelos, "modelo")
+    if x is None:
+        return
 
-        os.system("cls")
-        metricas = MetricasInferencia()
-        print("modelo_gguf:")
-        for id, modelo in lista_modelos.items():
-            print(f"id {id} do modelo_gguf: {modelo['Modelo']}")
-        x = input("digite o id do modelo_gguf: ")
+    modelo_nome = lista_modelos[x]["Modelo"]
+    metricas = MetricasInferencia()
+    nome_pasta = modelo_nome.replace("/", "--")
+    caminho = base_dir / "modelos_local" / nome_pasta
 
-        modelo_id = lista_modelos[x]["Modelo"]
-        arquivo_gguf = lista_modelos[x]["Arquivo"]
-        nome_pasta = modelo_id.replace("/", "--")
-        caminho_gguf = Path(__file__).parent / "modelos_local_gguf" / nome_pasta / arquivo_gguf
+    if not caminho.exists():
+        print(f"\n⚠️  O modelo '{modelo_nome}' ainda não foi baixado.")
+        print(f"    Esperado em: {caminho}")
+        print(f"    Baixe primeiro com a opção 1 (baixar modelo), id {x}.\n")
+        return
 
-        print("Carregando modelo_gguf...")
-        metricas.tempo_load_modelo_inicial()
+    print("Carregando modelo...")
+    metricas.tempo_load_modelo_inicial()
+    tokenizer = AutoTokenizer.from_pretrained(caminho, local_files_only=True)
+    model = AutoModelForCausalLM.from_pretrained(caminho, local_files_only=True)
+    model.eval()
+    metricas.tempo_load_modelo_final()
+    print(f"Pronto! o modelo: {modelo_nome} foi carregado com sucesso!")
 
-        llm = Llama(
-            model_path=str(caminho_gguf),
-            n_ctx=2048,
-            n_threads=8,
-            n_gpu_layers=0,
-            verbose=False,
-        )
+    cenario_A.cenario_a(modelo_nome, tokenizer, model, metricas)
+    if modelo_eliminado(modelo_nome):
+        print(f"Modelo {modelo_nome} foi eliminado. Pulando cenários restantes.")
+        return
+    cenario_B.cenario_b(modelo_nome, tokenizer, model, metricas)
+    if modelo_eliminado(modelo_nome):
+        print(f"Modelo {modelo_nome} foi eliminado. Pulando cenários restantes.")
+        return
+    cenario_C.cenario_c(modelo_nome, tokenizer, model)
+    if modelo_eliminado(modelo_nome):
+        print(f"Modelo {modelo_nome} foi eliminado. Pulando cenários restantes.")
+        return
+    cenario_D.cenario_d(modelo_nome, tokenizer, model)
+    if modelo_eliminado(modelo_nome):
+        print(f"Modelo {modelo_nome} foi eliminado. Pulando cenários restantes.")
+        return
 
-        metricas.tempo_load_modelo_final()
-        print(f"Pronto! modelo: {modelo_id} carregado em {metricas.tempo_carregamento_modelo:.2f}s")
-        #print("Iniciando cenario A: Stard Cold ...")
-        #cenario_A.cenario_a_gguf(llm, modelo_id, metricas)
-        #if modelo_eliminado(lista_modelos[x]['Modelo'], formato="gguf"):
-            #print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
-            #continue
-        #print("Iniciando cenario B: Geração em Série ...")
-        #cenario_B.cenario_b_gguf(llm, modelo_id, metricas)
-        #if modelo_eliminado(lista_modelos[x]['Modelo'], formato="gguf"):
-            #print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
-            #continue
-        #print("Iniciando cenario C: Pressão de JSON em Português ...")
-        #cenario_C.cenario_c_gguf(llm, modelo_id)
-        #if modelo_eliminado(lista_modelos[x]['Modelo'], formato="gguf"):
-            #print(f"Modelo {lista_modelos[x]['Modelo']} foi eliminado. Pulando cenários restantes.")
-            #continue
-        #print("Iniciando cenario D: Sem Contexto BNCC ...")
-        cenario_D.cenario_d_gguf(llm, modelo_id)
-        print("testes finalizado")
+
+def testar_gguf():
+    base_dir = Path(__file__).parent
+    with open(base_dir / "lista_de_modelos_gguf.json", "r", encoding="utf-8") as arquivo:
+        lista_modelos = json.load(arquivo)
+
+    limpar_tela()
+    x = escolher_modelo(lista_modelos, "modelo_gguf")
+    if x is None:
+        return
+
+    metricas = MetricasInferencia()
+    modelo_id = lista_modelos[x]["Modelo"]
+    arquivo_gguf = lista_modelos[x]["Arquivo"]
+    nome_pasta = modelo_id.replace("/", "--")
+    caminho_gguf = base_dir / "modelos_local_gguf" / nome_pasta / arquivo_gguf
+
+    if not caminho_gguf.exists():
+        print(f"\n⚠️  O modelo '{modelo_id}' ainda não foi baixado.")
+        print(f"    Esperado em: {caminho_gguf}")
+        print(f"    Baixe primeiro com a opção 2 (baixar modelo_gguf), id {x}.\n")
+        return
+
+    print("Carregando modelo_gguf...")
+    metricas.tempo_load_modelo_inicial()
+
+    llm = Llama(
+        model_path=str(caminho_gguf),
+        n_ctx=2048,
+        n_threads=8,
+        n_gpu_layers=0,
+        verbose=False,
+    )
+
+    metricas.tempo_load_modelo_final()
+    print(f"Pronto! modelo: {modelo_id} carregado em {metricas.tempo_carregamento_modelo:.2f}s")
+
+    print("Iniciando cenario A: Cold Start ...")
+    cenario_A.cenario_a_gguf(llm, modelo_id, metricas)
+    if modelo_eliminado(modelo_id, formato="gguf"):
+        print(f"Modelo {modelo_id} foi eliminado. Pulando cenários restantes.")
+        return
+
+    print("Iniciando cenario B: Geração em Série ...")
+    cenario_B.cenario_b_gguf(llm, modelo_id, metricas)
+    if modelo_eliminado(modelo_id, formato="gguf"):
+        print(f"Modelo {modelo_id} foi eliminado. Pulando cenários restantes.")
+        return
+
+    print("Iniciando cenario C: Pressão de JSON em Português ...")
+    cenario_C.cenario_c_gguf(llm, modelo_id)
+    if modelo_eliminado(modelo_id, formato="gguf"):
+        print(f"Modelo {modelo_id} foi eliminado. Pulando cenários restantes.")
+        return
+
+    print("Iniciando cenario D: Sem Contexto BNCC ...")
+    cenario_D.cenario_d_gguf(llm, modelo_id)
+    print("testes finalizado")
+
+
+def main():
+    limpar_tela()
+    while True:
+        print("O que vc quer fazer")
+        print("0 - Sair")
+        print("1 - baixar modelo")
+        print("2 - baixar modelo_gguf")
+        print("3 - testa modelo conventional")
+        print("4 - testa modelo_gguf")
+        resposta = input("digite sua resposta: ").strip()
+        if resposta == "0":
+            break
+        elif resposta == "1":
+            limpar_tela()
+            download_modelos.main()
+        elif resposta == "2":
+            limpar_tela()
+            download_modelos_gguf.download()
+        elif resposta == "3":
+            testar_safetensors()
+        elif resposta == "4":
+            testar_gguf()
+        else:
+            print("Opção inválida.")
+
+
+if __name__ == "__main__":
+    main()
 
