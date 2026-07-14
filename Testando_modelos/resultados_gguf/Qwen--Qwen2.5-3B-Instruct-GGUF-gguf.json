@@ -1,0 +1,18 @@
+{
+    "modelo": "Qwen/Qwen2.5-3B-Instruct-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "RAM pico do processo 2267.8 MB — limite era 2048 MB",
+    "cenario_a": {
+        "cold_start_segundos": 63.38,
+        "ram_idle_mb": 52.3,
+        "ram_pico_mb": 2267.8,
+        "ram_usada_mb": 2215.6,
+        "tokens_por_segundo": 3.74
+    },
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": null
+    },
+    "descrição": "O modelo estruturou uma questão corretamente, mas utilizou mais de 2 GB para cria a questão"
+}

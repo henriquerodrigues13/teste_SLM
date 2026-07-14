@@ -189,7 +189,7 @@ def cenario_a_gguf(llm, modelo, metricas):
 
     dados_existentes["cenario_a"] = resultados["cenario_a"]
 
-    if metricas.ram_pico_mb > 2048:
+    if metricas.ram_usada_mb > 2048:
         dados_existentes["eliminado"] = True
         dados_existentes["motivo_eliminacao"] = f"RAM pico do processo {metricas.ram_pico_mb:.1f} MB — limite era 2048 MB"
         dados_existentes["eliminacao_manual"] = {"eliminado": True, "eliminado_por": None}

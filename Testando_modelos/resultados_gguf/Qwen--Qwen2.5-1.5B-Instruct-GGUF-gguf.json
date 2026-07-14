@@ -1,0 +1,73 @@
+{
+    "modelo": "Qwen/Qwen2.5-1.5B-Instruct-GGUF",
+    "formato": "gguf",
+    "eliminado": false,
+    "motivo_eliminacao": null,
+    "cenario_a": {
+        "cold_start_segundos": 25.32,
+        "ram_idle_mb": 83.2,
+        "ram_pico_mb": 1767.1,
+        "ram_usada_mb": 1683.9,
+        "tokens_por_segundo": 10.66
+    },
+    "eliminacao_manual": {
+        "eliminado": false,
+        "eliminado_por": null
+    },
+    "descrição": "O modelo respondeu em um JSON valido, mas não entregou uma questão correta",
+    "cenario_b": {
+        "rodadas": 10,
+        "json_validos": 8,
+        "json_invalidos": 2,
+        "taxa_json_valido_percent": 80.0,
+        "crashes_oom": 0,
+        "tps_medio": 15.36,
+        "ram_media_mb": 1484.3,
+        "ram_pico_mb": 1505.7,
+        "tempo_medio_por_rodada_segundos": 35.68,
+        "aprovado_crashes": true,
+        "aprovado_ram": true,
+        "aprovado_tempo": true
+    },
+    "cenario_c": {
+        "execucoes": 1,
+        "quantidade_de_questoes": 5,
+        "tentativas": 0,
+        "valido_primeira_tentativa": true,
+        "precisou_retry": false,
+        "falhou_com_3_tentativas": false,
+        "aprovado": true
+    },
+    "cenario_d": {
+        "habilidades_testadas": [
+            "EF08MA05",
+            "EF06MA17"
+        ],
+        "outputs": {
+            "EF08MA05": {
+                "erro": "JSON inválido",
+                "output_bruto": "{\n    \"questoes\": [\n        {\n            \"enunciado\": \"Um triângulo retângulo ABC, com ângulo A = 90°, mede 5 cm por 3 cm. Qual é a medida do lado oposto ao ângulo B?\",\n            \"alternativas\": {\n                \"A\": \"8 cm\",\n                \"B\": \"12 cm\",\n                \"C\": \"7 cm\",\n                \"D\": \"6 cm\",\n                \"E\": \"9 cm\"\n            },\n            \"resposta_correta\": \"A\",\n            \"resolucao_passo_a_passo\": [\n                \"Desenhe o triângulo ABC com ângulo A = 90° e os lados AB = 3 cm, AC = 5 cm.\",\n                \"Calcular a medida do lado oposto ao ângulo B usando pitágoras: \\(BC^2 = AB^2 + AC^2\\).\"\n            ]\n        }\n    ]\n}"
+            },
+            "EF06MA17": {
+                "questoes": [
+                    {
+                        "enunciado": "Um quadrado de lado 4 cm possui um ângulo interno que mede:\nA) 108°\nB) 90°\nC) 72°\nD) 60°\nE) 36°",
+                        "alternativas": {
+                            "A": "4 cm x 4 cm = 16 cm², então o ângulo mede 90°.",
+                            "B": "O ângulo interno de um quadrado é sempre 90°, por isso B é a resposta correta.",
+                            "C": "72° é uma medida que não pode ocorrer em um quadrado, portanto C é errônea.",
+                            "D": "60° não é possível para um quadrado, então D é incorrecta.",
+                            "E": "36° é menor do que 90° e nem sequer pode ser obtido, por isso E é a resposta correta."
+                        },
+                        "resposta_correta": "B",
+                        "resolucao_passo_a_passo": "Enuncie o enunciado.\nAnalisar as alternativas e identificar a resposta correta.\nResolva para comprovar a escolha correta."
+                    }
+                ]
+            }
+        },
+        "json_valido": {
+            "EF08MA05": false,
+            "EF06MA17": true
+        }
+    }
+}

@@ -1,0 +1,41 @@
+{
+    "modelo": "bartowski/DeepSeek-R1-Distill-Qwen-1.5B-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "Falha de JSON recorrente — 3 tentativas sem JSON válido (limite era 3)",
+    "cenario_a": {
+        "cold_start_segundos": 39.65,
+        "ram_idle_mb": 39.1,
+        "ram_pico_mb": 1743.3,
+        "ram_usada_mb": 1704.2,
+        "tokens_por_segundo": 13.29
+    },
+    "eliminacao_manual": {
+        "eliminado": false,
+        "eliminado_por": null
+    },
+    "descrição": "o modelo fez questão valida e com solução adequada",
+    "cenario_b": {
+        "rodadas": 10,
+        "json_validos": 1,
+        "json_invalidos": 9,
+        "taxa_json_valido_percent": 10.0,
+        "crashes_oom": 0,
+        "tps_medio": 13.38,
+        "ram_media_mb": 1082.8,
+        "ram_pico_mb": 1132.5,
+        "tempo_medio_por_rodada_segundos": 65.77,
+        "aprovado_crashes": true,
+        "aprovado_ram": true,
+        "aprovado_tempo": true
+    },
+    "cenario_c": {
+        "execucoes": 3,
+        "quantidade_de_questoes": 5,
+        "tentativas": 3,
+        "valido_primeira_tentativa": false,
+        "precisou_retry": false,
+        "falhou_com_3_tentativas": true,
+        "aprovado": false
+    }
+}

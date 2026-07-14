@@ -1,0 +1,85 @@
+{
+    "modelo": "HuggingFaceTB/SmolLM2-1.7B-Instruct-GGUF",
+    "formato": "gguf",
+    "eliminado": false,
+    "motivo_eliminacao": null,
+    "cenario_a": {
+        "cold_start_segundos": 40.89,
+        "ram_idle_mb": 61.3,
+        "ram_pico_mb": 1854.9,
+        "ram_usada_mb": 1793.6,
+        "tokens_por_segundo": 8.39
+    },
+    "eliminacao_manual": {
+        "eliminado": false,
+        "eliminado_por": null
+    },
+    "descrição": "O modelo respondeu em um JSON valido, mas não entregou uma questão correta pra ser usada",
+    "cenario_b": {
+        "rodadas": 10,
+        "json_validos": 4,
+        "json_invalidos": 6,
+        "taxa_json_valido_percent": 40.0,
+        "crashes_oom": 0,
+        "tps_medio": 11.39,
+        "ram_media_mb": 1613.1,
+        "ram_pico_mb": 1647.2,
+        "tempo_medio_por_rodada_segundos": 50.58,
+        "aprovado_crashes": true,
+        "aprovado_ram": true,
+        "aprovado_tempo": true
+    },
+    "cenario_c": {
+        "execucoes": 1,
+        "quantidade_de_questoes": 5,
+        "tentativas": 0,
+        "valido_primeira_tentativa": true,
+        "precisou_retry": false,
+        "falhou_com_3_tentativas": false,
+        "aprovado": true
+    },
+    "cenario_d": {
+        "habilidades_testadas": [
+            "EF08MA05",
+            "EF06MA17"
+        ],
+        "outputs": {
+            "EF08MA05": {
+                "questoes": [
+                    {
+                        "enunciado": "Crie um triângulo equilátero com três lados iguais, cada um de 5 cm. Com base nesse triângulo, faça o seguinte cálculo: Se a soma dos ângulos adjacentes do triângulo é 180°, qual a medida em graus da hipótese perpendicular à lado comexterna (opostão) que têm os vértices (A e B)?",
+                        "alternativas": {
+                            "A": "50°",
+                            "B": "70°",
+                            "C": "90°",
+                            "D": "100°",
+                            "E": "120°"
+                        },
+                        "resposta_correta": "A",
+                        "resolucao_passo_a_passo": "O triângulo equilátero possui lados de 5 cm, portanto a medida da hipótese perpendicular é igual à soma dos ângulos adjacentes que são ±90°. A medida desses dois ângulos adjacentes é 90°, pois a hipótese perpendicular perpendicula ±50° + ±50° = 90°. Portanto, a mediana da hipótese perpendicular à lado comexterna é de 90°."
+                    }
+                ]
+            },
+            "EF06MA17": {
+                "questoes": [
+                    {
+                        "enunciado": "Encontre a raíz quadrada da seguinte equação: x^4 + 2x^3 - 10x^2 - 8x + 16 = 0",
+                        "alternativas": {
+                            "A": "-2, -2i, 2, 2i",
+                            "B": "2, -2, -2i, 2i",
+                            "C": "2i, 2i, -2, -2",
+                            "D": "2i, 2, 4, 8",
+                            "E": "-2i, 2i"
+                        },
+                        "resposta_correta": "B",
+                        "resolucao_passo_a_passo": "Para encontrar a raíz quadrada da equação x^4 + 2x^3 - 10x^2 - 8x + 16 = 0, utilize o método de Lagrange. A equação pode ser escrita em sua forma mais simples: x^4 + 2x^3 - 10x^2 - 8x + 16 = (x-2)(x+2)^2. Portanto, a raíz quadrada do primeiro termo é x=2 e daquilo do segundo é x=-2. Portanto, a solução que temos para o equação original é: (-2)^4 + 2(-2)^3 - 10(-2)^2 - 8(-2) + 16 = 16 - 16 - 20 + 16 = 0."
+                    }
+                ]
+            }
+        },
+        "json_valido": {
+            "EF08MA05": true,
+            "EF06MA17": true
+        }
+    }
+}

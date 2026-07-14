@@ -1,0 +1,41 @@
+{
+    "modelo": "Qwen/Qwen2.5-0.5B-Instruct-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "Falha de JSON recorrente — 3 tentativas sem JSON válido (limite era 3)",
+    "cenario_a": {
+        "cold_start_segundos": 9.3,
+        "ram_idle_mb": 56.3,
+        "ram_pico_mb": 586.8,
+        "ram_usada_mb": 530.5,
+        "tokens_por_segundo": 23.22
+    },
+    "eliminacao_manual": {
+        "eliminado": false,
+        "eliminado_por": null
+    },
+    "descrição": "O modelo respondeu em JSON valido, mas não deu uma questão correta matematicamente\"",
+    "cenario_b": {
+        "rodadas": 10,
+        "json_validos": 4,
+        "json_invalidos": 6,
+        "taxa_json_valido_percent": 40.0,
+        "crashes_oom": 0,
+        "tps_medio": 29.98,
+        "ram_media_mb": 581.6,
+        "ram_pico_mb": 596.3,
+        "tempo_medio_por_rodada_segundos": 12.17,
+        "aprovado_crashes": true,
+        "aprovado_ram": true,
+        "aprovado_tempo": true
+    },
+    "cenario_c": {
+        "execucoes": 3,
+        "quantidade_de_questoes": 5,
+        "tentativas": 3,
+        "valido_primeira_tentativa": false,
+        "precisou_retry": false,
+        "falhou_com_3_tentativas": true,
+        "aprovado": false
+    }
+}
