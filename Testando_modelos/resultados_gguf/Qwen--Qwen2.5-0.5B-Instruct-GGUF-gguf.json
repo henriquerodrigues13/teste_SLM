@@ -4,14 +4,15 @@
     "eliminado": true,
     "motivo_eliminacao": "Português incompreensível",
     "cenario_a": {
-        "cold_start_segundos": 10.4,
-        "ram_idle_mb": 179.3,
-        "ram_usada_mb": 521.1,
-        "tokens_por_segundo": 20.23
+        "cold_start_segundos": 19.55,
+        "ram_idle_mb": 181.6,
+        "ram_pico_mb": 496.3,
+        "ram_usada_mb": 314.7,
+        "tokens_por_segundo": 11.05
     },
     "eliminacao_manual": {
-        "eliminado": true,
-        "eliminado_por": "Português incompreensível"
+        "eliminado": false,
+        "eliminado_por": null
     },
     "descrição": "O modelo conseguiu estrutura o json da forma esperada, mas não entregou uma questão com uso falha nas altenativas ",
     "cenario_b": {

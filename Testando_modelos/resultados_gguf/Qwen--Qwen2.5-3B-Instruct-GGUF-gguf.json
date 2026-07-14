@@ -1,19 +1,20 @@
 {
     "modelo": "Qwen/Qwen2.5-3B-Instruct-GGUF",
     "formato": "gguf",
-    "eliminado": false,
-    "motivo_eliminacao": null,
+    "eliminado": true,
+    "motivo_eliminacao": "RAM pico do processo 2516.6 MB — limite era 2048 MB",
     "cenario_a": {
-        "cold_start_segundos": 135.76,
-        "ram_idle_mb": 321.0,
-        "ram_usada_mb": 1627.4,
-        "tokens_por_segundo": 1.59
+        "cold_start_segundos": 54.6,
+        "ram_idle_mb": 2032.4,
+        "ram_pico_mb": 2516.6,
+        "ram_usada_mb": 484.3,
+        "tokens_por_segundo": 4.34
     },
     "eliminacao_manual": {
-        "eliminado": false,
+        "eliminado": true,
         "eliminado_por": null
     },
-    "descrição": "uam reposta muito boa do modelo, talvez como ponto fraco sendo a questão do tempo de execução",
+    "descrição": "uma reposta muito boa do modelo, talvez como ponto fraco sendo a questão do tempo de execução",
     "cenario_b": {
         "rodadas": 10,
         "json_validos": 8,

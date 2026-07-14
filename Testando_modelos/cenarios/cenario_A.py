@@ -143,8 +143,6 @@ def cenario_a_gguf(llm, modelo, metricas):
             {"role": "user", "content": prompt},
         ]
 
-    metricas.iniciar(0)
-
     resposta = llm.create_chat_completion(
         messages=mensagens,
         max_tokens=1024,
@@ -157,7 +155,7 @@ def cenario_a_gguf(llm, modelo, metricas):
     tokens_entrada = resposta["usage"]["prompt_tokens"]
 
     metricas.tokens_entrada = tokens_entrada
-    metricas.finalizar(tokens_saida)
+    metricas.finalizar()
 
     output_text = resposta["choices"][0]["message"]["content"]
 

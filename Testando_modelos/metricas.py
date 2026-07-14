@@ -15,8 +15,8 @@ class MetricasInferencia:
         self.tempo_fim = None
         self.ram_pico_mb = 0
         self.ram_inicio_mb = 0
-        self.tokens_entrada = 0
-        self.tokens_saida = 0
+        #self.tokens_entrada = 0
+        #self.tokens_saida = 0
         self.tempo_total_por_rodada = []
         self.TPS_por_rodada = []
         self.ram_por_rodada = []
@@ -28,8 +28,7 @@ class MetricasInferencia:
                 self.ram_pico_mb = ram_atual
             time.sleep(0.1)
 
-    def iniciar(self, tokens_entrada: int):
-        self.tokens_entrada = tokens_entrada
+    def iniciar(self):
         self.ram_inicio_mb = self.processo.memory_info().rss / (1024 ** 2)
         self.ram_pico_mb = self.ram_inicio_mb
         self.tempo_inicio = time.perf_counter()
@@ -37,9 +36,8 @@ class MetricasInferencia:
         self._thread = threading.Thread(target=self._monitorar_ram, daemon=True)
         self._thread.start()
 
-    def finalizar(self, tokens_saida: int):
+    def finalizar(self):
         self.tempo_fim = time.perf_counter()
-        self.tokens_saida = tokens_saida
         self._monitorando = False
         self._thread.join()
 
@@ -109,9 +107,6 @@ class MetricasInferencia:
             Tempo de carregamento do modelos        : {self.tempo_carregamento_modelo:.2f}s
             Tempo de resposta do modelo             : {self.tempo_resposta_modelo:.2f}s
             Tempo total                             : {self.tempo_total:.2f}s
-            Tokens entrada                          : {self.tokens_entrada}
-            Tokens gerados                          : {self.tokens_saida}
-            Tokens/segundo                          : {self.tokens_por_segundo:.2f}
             RAM início                              : {self.ram_inicio_mb:.1f} MB
             RAM pico                                : {self.ram_pico_mb:.1f} MB
             RAM usada (delta)                       : {self.ram_usada_mb:.1f} MB
