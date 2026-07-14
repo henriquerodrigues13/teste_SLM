@@ -1,8 +1,6 @@
 import json
 import os
 from pathlib import Path
-
-import psutil
 from llama_cpp import Llama
 from Testando_modelos import download_modelos, download_modelos_gguf
 from Testando_modelos.cenarios import cenario_A, cenario_B, cenario_C, cenario_D
@@ -117,9 +115,7 @@ def testar_gguf():
 
     print("Carregando modelo_gguf...")
     metricas.tempo_load_modelo_inicial()
-    processo = psutil.Process(os.getpid())
-    print("Antes:", processo.memory_info().rss / (1024 ** 2), "MB")
-    metricas.iniciar()
+    metricas.iniciar()  # liga o monitor de RAM antes do load, p/ o pico incluir o carregamento
 
     llm = Llama(
         model_path=str(caminho_gguf),
@@ -130,7 +126,6 @@ def testar_gguf():
     )
 
     metricas.tempo_load_modelo_final()
-    print("Depois:", processo.memory_info().rss / (1024 ** 2), "MB")
     print(f"Pronto! modelo: {modelo_id} carregado em {metricas.tempo_carregamento_modelo:.2f}s")
 
     print("Iniciando cenario A: Cold Start ...")
