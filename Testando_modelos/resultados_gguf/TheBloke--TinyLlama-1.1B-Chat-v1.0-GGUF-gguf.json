@@ -1,0 +1,18 @@
+{
+    "modelo": "TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "Português incompreensível",
+    "cenario_a": {
+        "cold_start_segundos": 21.45,
+        "ram_idle_mb": 83.5,
+        "ram_pico_mb": 1097.3,
+        "ram_usada_mb": 1013.8,
+        "tokens_por_segundo": 14.83
+    },
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": "Português incompreensível"
+    },
+    "descrição": "o modelo não respondeu em json valido"
+}

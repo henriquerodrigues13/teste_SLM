@@ -1,0 +1,18 @@
+{
+    "modelo": "unsloth/Llama-3.2-3B-Instruct-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "RAM pico do processo 2941.8 MB — limite era 2048 MB",
+    "cenario_a": {
+        "cold_start_segundos": 62.55,
+        "ram_idle_mb": 24.5,
+        "ram_pico_mb": 2941.8,
+        "ram_usada_mb": 2917.3,
+        "tokens_por_segundo": 4.48
+    },
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": null
+    },
+    "descrição": "o modelo ultrapassou o limite de RAM minimo e não entregou uma questão valida"
+}
