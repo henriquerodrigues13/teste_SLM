@@ -1,0 +1,18 @@
+{
+    "modelo": "Qwen/Qwen1.5-1.8B-Chat-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "Português incompreensível",
+    "cenario_a": {
+        "cold_start_segundos": 88.87,
+        "ram_idle_mb": 21.4,
+        "ram_pico_mb": 1925.5,
+        "ram_usada_mb": 1904.2,
+        "tokens_por_segundo": 11.52
+    },
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": "Português incompreensível"
+    },
+    "descrição": "O modelo não respondeu em um JSON valido"
+}

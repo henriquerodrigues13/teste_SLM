@@ -103,5 +103,46 @@
         "Modelo": "Qwen/Qwen2.5-7B-Instruct-GGUF",
         "Arquivo": "qwen2.5-7b-instruct-q4_k_m.gguf",
         "Quantizacao": "Q4_K_M"
+    },
+    "21": {
+        "Modelo": "Qwen/Qwen1.5-1.8B-Chat-GGUF",
+        "Arquivo": "qwen1_5-1_8b-chat-q4_k_m.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "22": {
+        "Modelo": "TheBloke/stablelm-zephyr-3b-GGUF",
+        "Arquivo": "stablelm-zephyr-3b.Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "23": {
+        "Modelo": "TheBloke/phi-2-GGUF",
+        "Arquivo": "phi-2.Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "24": {
+        "Modelo": "BafS/gemma-2-2b-it-Q4_K_M-GGUF",
+        "Arquivo": "gemma-2-2b-it-q4_k_m.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "25": {
+        "Modelo": "MuffinMich/MiniCPM-2B-dpo-bf16-Q4_K_M-GGUF",
+        "Arquivo": "minicpm-2b-dpo-bf16-q4_k_m.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "26": {
+        "Modelo": "tensorblock/bloom-1b1-GGUF",
+        "Arquivo": "bloom-1b1-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "27": {
+        "Modelo": "tensorblock/bloom-3b-GGUF",
+        "Arquivo": "bloom-3b-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "29": {
+        "Modelo": "tensorblock/togethercomputer_RedPajama-INCITE-Chat-3B-v1-GGUF",
+        "Arquivo": "RedPajama-INCITE-Chat-3B-v1-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
     }
 }
+
