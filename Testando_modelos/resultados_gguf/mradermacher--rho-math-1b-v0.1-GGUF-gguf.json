@@ -1,0 +1,41 @@
+{
+    "modelo": "mradermacher/rho-math-1b-v0.1-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "Falha de JSON recorrente — 3 tentativas sem JSON válido (limite era 3)",
+    "cenario_a": {
+        "cold_start_segundos": 9.16,
+        "ram_idle_mb": 59.3,
+        "ram_pico_mb": 1437.3,
+        "ram_usada_mb": 1378.0,
+        "tokens_por_segundo": 111.75
+    },
+    "eliminacao_manual": {
+        "eliminado": false,
+        "eliminado_por": null
+    },
+    "descrição": null,
+    "cenario_b": {
+        "rodadas": 10,
+        "json_validos": 0,
+        "json_invalidos": 10,
+        "taxa_json_valido_percent": 0.0,
+        "crashes_oom": 0,
+        "tps_medio": 147.71,
+        "ram_media_mb": 1439.7,
+        "ram_pico_mb": 1441.5,
+        "tempo_medio_por_rodada_segundos": 6.94,
+        "aprovado_crashes": true,
+        "aprovado_ram": true,
+        "aprovado_tempo": true
+    },
+    "cenario_c": {
+        "execucoes": 3,
+        "quantidade_de_questoes": 5,
+        "tentativas": 3,
+        "valido_primeira_tentativa": false,
+        "precisou_retry": false,
+        "falhou_com_3_tentativas": true,
+        "aprovado": false
+    }
+}

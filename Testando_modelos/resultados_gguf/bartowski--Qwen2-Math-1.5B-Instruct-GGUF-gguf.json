@@ -1,0 +1,32 @@
+{
+    "modelo": "bartowski/Qwen2-Math-1.5B-Instruct-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "RAM pico do processo 2119.6 MB — limite era 2048 MB",
+    "cenario_a": {
+        "cold_start_segundos": 8.92,
+        "ram_idle_mb": 58.8,
+        "ram_pico_mb": 2119.6,
+        "ram_usada_mb": 2060.8,
+        "tokens_por_segundo": 30.51
+    },
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": null
+    },
+    "descrição": null,
+    "cenario_b": {
+        "rodadas": 10,
+        "json_validos": 0,
+        "json_invalidos": 10,
+        "taxa_json_valido_percent": 0.0,
+        "crashes_oom": 0,
+        "tps_medio": 117.78,
+        "ram_media_mb": 2111.2,
+        "ram_pico_mb": 2119.7,
+        "tempo_medio_por_rodada_segundos": 4.06,
+        "aprovado_crashes": true,
+        "aprovado_ram": false,
+        "aprovado_tempo": true
+    }
+}
