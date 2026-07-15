@@ -1,0 +1,41 @@
+{
+    "modelo": "bartowski/SmolLM2-135M-Instruct-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "Falha de JSON recorrente — 3 tentativas sem JSON válido (limite era 3)",
+    "cenario_a": {
+        "cold_start_segundos": 2.61,
+        "ram_idle_mb": 59.7,
+        "ram_pico_mb": 351.5,
+        "ram_usada_mb": 291.8,
+        "tokens_por_segundo": 139.73
+    },
+    "eliminacao_manual": {
+        "eliminado": false,
+        "eliminado_por": null
+    },
+    "descrição": null,
+    "cenario_b": {
+        "rodadas": 10,
+        "json_validos": 0,
+        "json_invalidos": 10,
+        "taxa_json_valido_percent": 0.0,
+        "crashes_oom": 0,
+        "tps_medio": 189.88,
+        "ram_media_mb": 353.1,
+        "ram_pico_mb": 355.9,
+        "tempo_medio_por_rodada_segundos": 2.2,
+        "aprovado_crashes": true,
+        "aprovado_ram": true,
+        "aprovado_tempo": true
+    },
+    "cenario_c": {
+        "execucoes": 3,
+        "quantidade_de_questoes": 5,
+        "tentativas": 3,
+        "valido_primeira_tentativa": false,
+        "precisou_retry": false,
+        "falhou_com_3_tentativas": true,
+        "aprovado": false
+    }
+}

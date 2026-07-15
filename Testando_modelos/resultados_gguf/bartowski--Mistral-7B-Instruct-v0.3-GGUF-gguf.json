@@ -1,0 +1,18 @@
+{
+    "modelo": "bartowski/Mistral-7B-Instruct-v0.3-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "RAM pico do processo 8376.5 MB — limite era 2048 MB",
+    "cenario_a": {
+        "cold_start_segundos": 27.26,
+        "ram_idle_mb": 58.7,
+        "ram_pico_mb": 8376.5,
+        "ram_usada_mb": 8317.8,
+        "tokens_por_segundo": 8.62
+    },
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": null
+    },
+    "descrição": null
+}

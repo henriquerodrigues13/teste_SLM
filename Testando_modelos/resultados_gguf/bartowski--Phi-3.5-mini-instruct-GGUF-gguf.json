@@ -1,0 +1,18 @@
+{
+    "modelo": "bartowski/Phi-3.5-mini-instruct-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "RAM pico do processo 5464.0 MB — limite era 2048 MB",
+    "cenario_a": {
+        "cold_start_segundos": 28.67,
+        "ram_idle_mb": 58.6,
+        "ram_pico_mb": 5464.0,
+        "ram_usada_mb": 5405.4,
+        "tokens_por_segundo": 10.5
+    },
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": null
+    },
+    "descrição": null
+}

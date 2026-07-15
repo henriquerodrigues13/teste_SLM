@@ -1,0 +1,18 @@
+{
+    "modelo": "microsoft/Phi-3-mini-4k-instruct-gguf",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "RAM pico do processo 5387.4 MB — limite era 2048 MB",
+    "cenario_a": {
+        "cold_start_segundos": 17.17,
+        "ram_idle_mb": 58.6,
+        "ram_pico_mb": 5387.4,
+        "ram_usada_mb": 5328.9,
+        "tokens_por_segundo": 15.78
+    },
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": null
+    },
+    "descrição": null
+}

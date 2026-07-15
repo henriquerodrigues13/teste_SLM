@@ -1,0 +1,18 @@
+{
+    "modelo": "bartowski/google_gemma-3-4b-it-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "RAM pico do processo 5206.9 MB — limite era 2048 MB",
+    "cenario_a": {
+        "cold_start_segundos": 26.79,
+        "ram_idle_mb": 58.9,
+        "ram_pico_mb": 5206.9,
+        "ram_usada_mb": 5148.0,
+        "tokens_por_segundo": 13.85
+    },
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": null
+    },
+    "descrição": null
+}

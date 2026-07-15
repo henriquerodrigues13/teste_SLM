@@ -1,0 +1,18 @@
+{
+    "modelo": "bartowski/granite-3.0-2b-instruct-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "RAM pico do processo 3300.2 MB — limite era 2048 MB",
+    "cenario_a": {
+        "cold_start_segundos": 15.72,
+        "ram_idle_mb": 58.8,
+        "ram_pico_mb": 3300.2,
+        "ram_usada_mb": 3241.4,
+        "tokens_por_segundo": 13.23
+    },
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": null
+    },
+    "descrição": null
+}

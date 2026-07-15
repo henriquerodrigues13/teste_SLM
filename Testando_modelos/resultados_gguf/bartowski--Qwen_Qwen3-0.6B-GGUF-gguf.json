@@ -1,0 +1,85 @@
+{
+    "modelo": "bartowski/Qwen_Qwen3-0.6B-GGUF",
+    "formato": "gguf",
+    "eliminado": false,
+    "motivo_eliminacao": null,
+    "cenario_a": {
+        "cold_start_segundos": 3.83,
+        "ram_idle_mb": 59.4,
+        "ram_pico_mb": 1127.0,
+        "ram_usada_mb": 1067.6,
+        "tokens_por_segundo": 32.93
+    },
+    "eliminacao_manual": {
+        "eliminado": false,
+        "eliminado_por": null
+    },
+    "descrição": null,
+    "cenario_b": {
+        "rodadas": 10,
+        "json_validos": 8,
+        "json_invalidos": 2,
+        "taxa_json_valido_percent": 80.0,
+        "crashes_oom": 0,
+        "tps_medio": 87.49,
+        "ram_media_mb": 1137.1,
+        "ram_pico_mb": 1145.1,
+        "tempo_medio_por_rodada_segundos": 4.96,
+        "aprovado_crashes": true,
+        "aprovado_ram": true,
+        "aprovado_tempo": true
+    },
+    "cenario_c": {
+        "execucoes": 1,
+        "quantidade_de_questoes": 5,
+        "tentativas": 0,
+        "valido_primeira_tentativa": true,
+        "precisou_retry": false,
+        "falhou_com_3_tentativas": false,
+        "aprovado": true
+    },
+    "cenario_d": {
+        "habilidades_testadas": [
+            "EF08MA05",
+            "EF06MA17"
+        ],
+        "outputs": {
+            "EF08MA05": {
+                "questoes": [
+                    {
+                        "enunciado": "Em um quadrilátero, o lado oposto é igual ao do lado complementar. Qual das figuras abaixo representa esse quadrilátero?",
+                        "alternativas": {
+                            "A": "Quadrilátero ABCD com lados AB = CD e BC = DA",
+                            "B": "Quadrilátero ABCD com lados AB = CD e AD = BC",
+                            "C": "Quadrilátero ABCD com lados AB = BC e CD = AD",
+                            "D": "Quadrilátero ABCD com lados AB ≠ BC e CD ≠ DA",
+                            "E": "Nenhuma das figuras acima"
+                        },
+                        "resposta_correta": "B",
+                        "resolucao_passo_a_passo": "A quadrilátero é um paralelogramo, onde os lados opostos são iguais. Portanto, BC = DA e AB = CD."
+                    }
+                ]
+            },
+            "EF06MA17": {
+                "questoes": [
+                    {
+                        "enunciado": "Um quadrilátero é regular se seus lados são congruente e seus ângulos internos são iguais. Qual é a soma dos ângulos internos de um quadrilátero regular?",
+                        "alternativas": {
+                            "A": "180°",
+                            "B": "360°",
+                            "C": "450°",
+                            "D": "90°",
+                            "E": "270°"
+                        },
+                        "resposta_correta": "B",
+                        "resolucao_passo_a_passo": "A soma dos ângulos internos de um quadrilátero regular é sempre 360°, pois os quadriláteros regulares são trapezoides com quatro ângulos iguais e os seus ângulos internos são igualmente distribuídos."
+                    }
+                ]
+            }
+        },
+        "json_valido": {
+            "EF08MA05": true,
+            "EF06MA17": true
+        }
+    }
+}

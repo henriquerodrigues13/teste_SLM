@@ -2,17 +2,17 @@
     "modelo": "bartowski/Qwen2.5-Math-1.5B-Instruct-GGUF",
     "formato": "gguf",
     "eliminado": true,
-    "motivo_eliminacao": "Português incompreensível",
+    "motivo_eliminacao": "RAM pico do processo 2116.3 MB — limite era 2048 MB",
     "cenario_a": {
-        "cold_start_segundos": 33.94,
-        "ram_idle_mb": 38.6,
-        "ram_pico_mb": 1586.6,
-        "ram_usada_mb": 1548.0,
-        "tokens_por_segundo": 11.05
+        "cold_start_segundos": 9.22,
+        "ram_idle_mb": 58.5,
+        "ram_pico_mb": 2116.3,
+        "ram_usada_mb": 2057.8,
+        "tokens_por_segundo": 29.5
     },
     "eliminacao_manual": {
         "eliminado": true,
-        "eliminado_por": "Português incompreensível"
+        "eliminado_por": null
     },
-    "descrição": "O modelo não respondeu em json valido"
+    "descrição": null
 }
