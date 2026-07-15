@@ -148,6 +148,31 @@
         "Modelo": "tensorblock/togethercomputer_RedPajama-INCITE-Chat-3B-v1-GGUF",
         "Arquivo": "RedPajama-INCITE-Chat-3B-v1-Q4_K_M.gguf",
         "Quantizacao": "Q4_K_M"
+    },
+    "30": {
+        "Modelo": "bartowski/SmolLM2-135M-Instruct-GGUF",
+        "Arquivo": "SmolLM2-135M-Instruct-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "31": {
+        "Modelo": "bartowski/Qwen_Qwen3-0.6B-GGUF",
+        "Arquivo": "Qwen_Qwen3-0.6B-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "32": {
+        "Modelo": "bartowski/Qwen2-Math-1.5B-Instruct-GGUF",
+        "Arquivo": "Qwen2-Math-1.5B-Instruct-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "33": {
+        "Modelo": "bartowski/microsoft_Phi-4-mini-reasoning-GGUF",
+        "Arquivo": "microsoft_Phi-4-mini-reasoning-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
+    "34": {
+        "Modelo": "mradermacher/rho-math-1b-v0.1-GGUF",
+        "Arquivo": "rho-math-1b-v0.1.Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
     }
 }
 
