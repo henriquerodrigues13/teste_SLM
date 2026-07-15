@@ -1,0 +1,18 @@
+{
+    "modelo": "BafS/gemma-2-2b-it-Q4_K_M-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "RAM pico do processo 2355.9 MB — limite era 2048 MB",
+    "cenario_a": {
+        "cold_start_segundos": 34.65,
+        "ram_idle_mb": 56.6,
+        "ram_pico_mb": 2355.9,
+        "ram_usada_mb": 2299.3,
+        "tokens_por_segundo": 5.69
+    },
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": null
+    },
+    "descrição": "O modelo entregou um JSON valido e um boa questão mas consumiu RAM demais"
+}

@@ -1,0 +1,18 @@
+{
+    "modelo": "MuffinMich/MiniCPM-2B-dpo-bf16-Q4_K_M-GGUF",
+    "formato": "gguf",
+    "eliminado": true,
+    "motivo_eliminacao": "RAM pico do processo 2652.5 MB — limite era 2048 MB",
+    "cenario_a": {
+        "cold_start_segundos": 181.15,
+        "ram_idle_mb": 65.5,
+        "ram_pico_mb": 2652.5,
+        "ram_usada_mb": 2587.0,
+        "tokens_por_segundo": 5.65
+    },
+    "eliminacao_manual": {
+        "eliminado": true,
+        "eliminado_por": null
+    },
+    "descrição": "O modelo não respondeu em JSON valido alem de usa mais RAM do q o limite de 2 GB"
+}

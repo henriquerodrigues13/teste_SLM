@@ -139,6 +139,11 @@
         "Arquivo": "bloom-3b-Q4_K_M.gguf",
         "Quantizacao": "Q4_K_M"
     },
+    "28": {
+        "Modelo": "tiiuae/Falcon3-1B-Instruct-GGUF",
+        "Arquivo": "Falcon3-1B-Instruct-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
+    },
     "29": {
         "Modelo": "tensorblock/togethercomputer_RedPajama-INCITE-Chat-3B-v1-GGUF",
         "Arquivo": "RedPajama-INCITE-Chat-3B-v1-Q4_K_M.gguf",
