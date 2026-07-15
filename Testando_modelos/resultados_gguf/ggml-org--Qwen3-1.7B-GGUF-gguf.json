@@ -1,0 +1,18 @@
+{
+    "modelo": "ggml-org/Qwen3-1.7B-GGUF",
+    "formato": "gguf",
+    "eliminado": false,
+    "motivo_eliminacao": null,
+    "cenario_a": {
+        "cold_start_segundos": 36.95,
+        "ram_idle_mb": 18.9,
+        "ram_pico_mb": 1342.1,
+        "ram_usada_mb": 1323.2,
+        "tokens_por_segundo": 7.98
+    },
+    "eliminacao_manual": {
+        "eliminado": false,
+        "eliminado_por": null
+    },
+    "descrição": "O modelo fez uma questão otima"
+}

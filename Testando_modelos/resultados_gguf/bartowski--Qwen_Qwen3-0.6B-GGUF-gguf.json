@@ -4,11 +4,11 @@
     "eliminado": false,
     "motivo_eliminacao": null,
     "cenario_a": {
-        "cold_start_segundos": 3.83,
-        "ram_idle_mb": 59.4,
-        "ram_pico_mb": 1127.0,
-        "ram_usada_mb": 1067.6,
-        "tokens_por_segundo": 32.93
+        "cold_start_segundos": 8.34,
+        "ram_idle_mb": 83.2,
+        "ram_pico_mb": 726.4,
+        "ram_usada_mb": 643.2,
+        "tokens_por_segundo": 15.11
     },
     "eliminacao_manual": {
         "eliminado": false,
@@ -17,14 +17,14 @@
     "descrição": null,
     "cenario_b": {
         "rodadas": 10,
-        "json_validos": 8,
-        "json_invalidos": 2,
-        "taxa_json_valido_percent": 80.0,
+        "json_validos": 10,
+        "json_invalidos": 0,
+        "taxa_json_valido_percent": 100.0,
         "crashes_oom": 0,
-        "tps_medio": 87.49,
-        "ram_media_mb": 1137.1,
-        "ram_pico_mb": 1145.1,
-        "tempo_medio_por_rodada_segundos": 4.96,
+        "tps_medio": 21.04,
+        "ram_media_mb": 724.6,
+        "ram_pico_mb": 743.6,
+        "tempo_medio_por_rodada_segundos": 18.52,
         "aprovado_crashes": true,
         "aprovado_ram": true,
         "aprovado_tempo": true
@@ -47,32 +47,32 @@
             "EF08MA05": {
                 "questoes": [
                     {
-                        "enunciado": "Em um quadrilátero, o lado oposto é igual ao do lado complementar. Qual das figuras abaixo representa esse quadrilátero?",
+                        "enunciado": "Um triângulo é formado por três segmentos de uma reta que passam por um ponto comum.",
                         "alternativas": {
-                            "A": "Quadrilátero ABCD com lados AB = CD e BC = DA",
-                            "B": "Quadrilátero ABCD com lados AB = CD e AD = BC",
-                            "C": "Quadrilátero ABCD com lados AB = BC e CD = AD",
-                            "D": "Quadrilátero ABCD com lados AB ≠ BC e CD ≠ DA",
-                            "E": "Nenhuma das figuras acima"
+                            "A": "É um segmento",
+                            "B": "É um ponto",
+                            "C": "É um lado do triângulo",
+                            "D": "É um vértice",
+                            "E": "É uma reta"
                         },
-                        "resposta_correta": "B",
-                        "resolucao_passo_a_passo": "A quadrilátero é um paralelogramo, onde os lados opostos são iguais. Portanto, BC = DA e AB = CD."
+                        "resposta_correta": "E",
+                        "resolucao_passo_a_passo": "Um segmento de uma reta é formado por três segmentos que passam por um ponto comum, sendo esse ponto considerado o ponto de interseção entre os três segmentos. Assim, a resposta correta é 'E'."
                     }
                 ]
             },
             "EF06MA17": {
                 "questoes": [
                     {
-                        "enunciado": "Um quadrilátero é regular se seus lados são congruente e seus ângulos internos são iguais. Qual é a soma dos ângulos internos de um quadrilátero regular?",
+                        "enunciado": "Um quadrilátero é um polígono com quatro lados, em que cada lado é paralelo a outro. O que é o nome desse polígono?",
                         "alternativas": {
-                            "A": "180°",
-                            "B": "360°",
-                            "C": "450°",
-                            "D": "90°",
-                            "E": "270°"
+                            "A": "Quadrilátero irregular",
+                            "B": "Quadrilátero regular",
+                            "C": "Triângulo equilátero",
+                            "D": "Quadrilátero isósceles",
+                            "E": "Não é um quadrilátero"
                         },
-                        "resposta_correta": "B",
-                        "resolucao_passo_a_passo": "A soma dos ângulos internos de um quadrilátero regular é sempre 360°, pois os quadriláteros regulares são trapezoides com quatro ângulos iguais e os seus ângulos internos são igualmente distribuídos."
+                        "resposta_correta": "A",
+                        "resolucao_passo_a_passo": "Um quadrilátero é um polígono com quatro lados, e cada lado é paralelo a outro. Portanto, ele é um quadrilátero irregular."
                     }
                 ]
             }

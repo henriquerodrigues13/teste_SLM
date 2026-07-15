@@ -173,6 +173,11 @@
         "Modelo": "mradermacher/rho-math-1b-v0.1-GGUF",
         "Arquivo": "rho-math-1b-v0.1.Q4_K_M.gguf",
         "Quantizacao": "Q4_K_M"
+    },
+    "35": {
+        "Modelo": "ggml-org/Qwen3-1.7B-GGUF",
+        "Arquivo": "Qwen3-1.7B-Q4_K_M.gguf",
+        "Quantizacao": "Q4_K_M"
     }
 }
 
